@@ -7,7 +7,7 @@
 * Tran, Gia Hung (s3715272)
 * Zhang, Junhao (s3714056)
 * Tran, Phuong-Trung (s3607139)
-* SURNAME, GivenName (sXXXX)
+* Kim, Youngho (s3726115)
 
 ## Records
 
