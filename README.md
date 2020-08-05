@@ -5,7 +5,7 @@
 ## Members
 * Alhowsawi, Amrah (s3760065)
 * Tran, Gia Hung (s3715272)
-* SURNAME, GivenName (sXXXX)
+* Zhang, Junhao (s3714056)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 
