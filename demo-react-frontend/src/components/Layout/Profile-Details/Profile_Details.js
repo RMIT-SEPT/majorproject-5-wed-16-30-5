@@ -4,6 +4,7 @@ import CreateChangePassButton from './CreateChangePassButton'
 import Sidebar from '../Sidebar/Sidebar.js';
 import './Profile_Details.css';
 
+
      class Profile_Details extends Component
      {
          constructor(props) {
@@ -126,21 +127,23 @@ import './Profile_Details.css';
                                     </Form.Group>
                                 </Form.Row>
                                 <br/>
-                             <Button id="updateButton" type="submit" >
+                            <Form.Row>   
+                             <Button id="updateButton" type="submit" onClick={this}>
                                  Update
                              </Button>
+                             </Form.Row>
                              <p></p>
                          </Form>
                        <CreateChangePassButton />
                      </div>
                  </div>
-               </Container>
+            </Container>
                
              );
              
          }
 
     
-        }
+    };
    
      export default Profile_Details;

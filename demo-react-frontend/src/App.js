@@ -17,7 +17,7 @@ import serviceDash from "./components/Pages/User/ServiceDash.js";
 import UserAppo from "./components/Pages/User/UserDash.js";
 import AppoDetails from "./components/Pages/User/AppoDetails.js";
 import CreateAppo from "./components/Pages/User/CreateAppo.js";
-import Profile_Details from "./components/Layout/Profile-Details/Profile_Details.";
+import Profile_Details from "./components/Layout/Profile-Details/Profile_Details";
 
 
 
