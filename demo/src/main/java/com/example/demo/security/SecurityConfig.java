@@ -15,12 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.util.Arrays;
 
 import static com.example.demo.security.SecurityConstants.*;
 
@@ -31,7 +25,6 @@ import static com.example.demo.security.SecurityConstants.*;
         jsr250Enabled = true,
         prePostEnabled = true
 )
-@EnableWebMvc
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

@@ -26,8 +26,6 @@ services:
 
   demoapp-frontend:
     image: demoapp-frontend
-    depends_on:
-      - demoapp-main
     ports:
       - 3000:3000
     tty: true

@@ -14,7 +14,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/appointmentTaskList")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 public class AppointmentTaskListController {
 
     @Autowired
