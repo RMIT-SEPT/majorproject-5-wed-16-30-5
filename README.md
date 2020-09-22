@@ -12,8 +12,7 @@
 ## Records
 
 * Github repository :https://github.com/RMIT-SEPT/majorproject-5-wed-16-30-5
-* Trello Workspace :https://trello.com/invite/b/NoYUJC5H/51cef84201882449bb26db48c931e04c/agile-sprint-board
-
+* Trello Workspace :https://trello.com/b/NoYUJC5H/5wed-1630-5-software-eng
 ## Code documentation
 
 [Quick Start](/docs/README.md) in `docs` folder
