@@ -1,6 +1,6 @@
 # RMIT SEPT 2020 Major Project
 
-# Group 00
+# Group 5
 
 ## Members
 * Alhowsawi, Amrah (s3760065)
