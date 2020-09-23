@@ -135,7 +135,7 @@ class SignUp extends Component {
                         : <br/>
                     }
 
-                   <Button id="submitD" type="submit" value="Submit" className="logbtn" href="/login">
+                   <Button id="submitD" type="submit" value="Submit" className="logbtn">
                             Register
                     </Button>
                 </form>
