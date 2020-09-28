@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Button, Form, Container, Col, Alert} from "react-bootstrap";
 import './SignUp.css';
 import urlAddress from '../../ip.json';
+import axios from "axios";
+// import  './Profile_Details/Profile_Details.js';
 
 const url = 'http://' + urlAddress.ip + ':8080/api/';
 
@@ -16,6 +18,9 @@ class SignUp extends Component {
             type: 'customer',
             businessName: ''
         };
+        
+        // this.handleChange = this.handleChange.bind(this);
+
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -87,13 +92,60 @@ class SignUp extends Component {
             })
     }
 
+    // getSingUpData() {
+            
+    //     var data = document.getElementById("txtEmail");
+    //     window.localStorage.setItem("dataValue", data);
+    //     return;
+
+    // }
+    //  handleSubmit () {
+    //     const name = document.getElementById('txtName').value;
+    //     const email = document.getElementById('txtEmail').value;
+    
+    //     // to set into local storage
+    //     /* localStorage.setItem("NAME", name);
+    //     localStorage.setItem("SURNAME", surname); */
+        
+    //     sessionStorage.setItem("NAME", name);
+    //     sessionStorage.setItem("EMAIL", email);
+    
+    //     return;
+    // }
+    // handleChange (e) {
+    //     // this.setState({email: e.target.value});
+    //     this.setState({ [e.target.name]: e.target.value });
+
+        
+    //  };
+
+    //  handleSubmit (e) {
+    //     e.preventDefault();
+
+    //     const detail= {
+    //         username: this.state.email,
+    //     };
+    //     axios.post('http://jsonplaceholder.typicode.com/users', {detail})
+    //      .then(response => {
+    //          console.log(response.data);
+    //      });
+    //  };
 
     render () {
        return (
            <Container className="register">
                 <br/>
                 <h1>Register</h1>
-                <form onSubmit={this.onSubmit}>
+
+             {/* <form  onSubmit={this.handleSubmit}>
+                 <label>
+             <input type="text" id="txtName" name="name" placeholder="Enter name.." /> 
+             <input type="text" id="txtEmail" name="email" placeholder="Enter email.."  onChange={this.handleChange}/>
+             </label>
+             <button type="submit"> Register </button>
+             </form>  */}
+
+                <form  id="regForm" action=''>
 
                     <div className="form-group-register">
                         <br/>
@@ -103,7 +155,7 @@ class SignUp extends Component {
 
                     <div className="form-group-register">
                         <br/>
-                        <input id="txtPass" type="text" placeholder="Enter Password" 
+                        <input id="txtName" type="text" placeholder="Enter Password" 
                             name="password" value={this.state.password} onChange={this.onChange}></input>
                     </div>
 
@@ -135,7 +187,7 @@ class SignUp extends Component {
                         : <br/>
                     }
 
-                   <Button id="submitD" type="submit" value="Submit" className="logbtn">
+                   <Button id="submitD"onClick={this.handleSubmit} type="submit" value="Submit" className="logbtn">
                             Register
                     </Button>
                 </form>
