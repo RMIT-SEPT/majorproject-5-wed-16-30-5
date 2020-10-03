@@ -19,6 +19,8 @@ import UserAppo from "./components/Pages/User/UserDash.js";
 import AppoDetails from "./components/Pages/User/AppoDetails.js";
 import CreateAppo from "./components/Pages/User/CreateAppo.js";
 import Profile_Details from "./components/Pages/Profile_Details/Profile_Details";
+import Edit_Profile from "./components/Pages/Profile_Details/Edit_Profile";
+
 import Contact from './components/Pages/Contact/Contact.js';
 import LogOut from './components/Pages/Login/LogOut.js'
 
@@ -51,6 +53,7 @@ function App() {
           <Route exact path="/" component={About} />
           <Route exact path="/about" component={Aboutpage} />
           <Route exact path="/profile" component={Profile_Details} />
+          <Route exact path="/profile/Edit" component={Edit_Profile} />
           
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/LogOut" component={LogOut} />

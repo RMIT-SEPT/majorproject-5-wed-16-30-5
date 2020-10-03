@@ -92,59 +92,13 @@ class SignUp extends Component {
             })
     }
 
-    // getSingUpData() {
-            
-    //     var data = document.getElementById("txtEmail");
-    //     window.localStorage.setItem("dataValue", data);
-    //     return;
-
-    // }
-    //  handleSubmit () {
-    //     const name = document.getElementById('txtName').value;
-    //     const email = document.getElementById('txtEmail').value;
     
-    //     // to set into local storage
-    //     /* localStorage.setItem("NAME", name);
-    //     localStorage.setItem("SURNAME", surname); */
-        
-    //     sessionStorage.setItem("NAME", name);
-    //     sessionStorage.setItem("EMAIL", email);
-    
-    //     return;
-    // }
-    // handleChange (e) {
-    //     // this.setState({email: e.target.value});
-    //     this.setState({ [e.target.name]: e.target.value });
-
-        
-    //  };
-
-    //  handleSubmit (e) {
-    //     e.preventDefault();
-
-    //     const detail= {
-    //         username: this.state.email,
-    //     };
-    //     axios.post('http://jsonplaceholder.typicode.com/users', {detail})
-    //      .then(response => {
-    //          console.log(response.data);
-    //      });
-    //  };
 
     render () {
        return (
            <Container className="register">
                 <br/>
                 <h1>Register</h1>
-
-             {/* <form  onSubmit={this.handleSubmit}>
-                 <label>
-             <input type="text" id="txtName" name="name" placeholder="Enter name.." /> 
-             <input type="text" id="txtEmail" name="email" placeholder="Enter email.."  onChange={this.handleChange}/>
-             </label>
-             <button type="submit"> Register </button>
-             </form>  */}
-
                 <form  id="regForm" action=''>
 
                     <div className="form-group-register">
