@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Col, Container, Form} from "react-bootstrap";
+import DeleteAccount from './DeleteAccount';
 import CreateEditButton from './CreateEditButton'
 import Sidebar from '../../Layout/Sidebar/Sidebar.js';
 import axios from 'axios';
@@ -77,7 +78,7 @@ console.log(urlAddress.ip);
         // const cus_id = this.props.match.params.id;
         // console.log(cus_id);
         // this.props.history.push(url + `/users/${customer_Id}`);
-        axios.get(url + `users/3`)
+        axios.get(url + `users/9`)
         // axios.get('http://jsonplaceholder.typicode.com/posts/1')
         // axios.get('http://jsonplaceholder.typicode.com/posts/1')
             .then(response =>{
@@ -126,6 +127,7 @@ console.log(urlAddress.ip);
                     <h6>Suburb</h6>
                     <hr></hr>
                 <CreateEditButton/> 
+                <DeleteAccount/>
              </div> 
           </Container>
             
