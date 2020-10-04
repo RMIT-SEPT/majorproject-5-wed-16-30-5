@@ -62,13 +62,13 @@ class Login extends Component {
           alert("Error contacting server");
         });
     } else if (this.state.account === "business") {
-      fetch(url + "users/OwnerLogin", requestOptions)
+      fetch(url + "businessOwners/login", requestOptions)
         .then((response) => {
           console.log(response.status);
           console.log(response.json());
           if (response.status === 200) {
             response.json().then((data) => {
-              console.log(data.token);
+              console.log("data: "+data.token);
               window.sessionStorage.setItem("token", data.token);
               window.sessionStorage.setItem("loggedIn", true);
               this.props.history.push("/dashboardOwner");

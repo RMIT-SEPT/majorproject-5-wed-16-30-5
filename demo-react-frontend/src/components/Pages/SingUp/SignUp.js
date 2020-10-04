@@ -16,7 +16,7 @@ class SignUp extends Component {
             password: '',
             confirmPassword: '',
             type: 'customer',
-            businessName: ''
+            companyName: ''
         };
         
         // this.handleChange = this.handleChange.bind(this);
@@ -79,11 +79,11 @@ class SignUp extends Component {
                 username: this.state.email,
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword,
-                businessName: this.state.businessName
+                companyName: this.state.companyName
             })
         };
 
-        fetch('http://localhost:8080/api/users/BusinessRegister', requestOptions)
+        fetch(url +'businessOwners/register', requestOptions)
             .then(response => {
                 console.log(response)
             })
@@ -135,8 +135,8 @@ class SignUp extends Component {
                             <div className="form-group-business">
                                 
                                 <br/>
-                                <input type="text" name="businessName" placeholder="Enter Business Name"
-                                    value={this.state.businessName} onChange={this.onChange}></input>
+                                <input type="text" name="companyName" placeholder="Enter Business Name"
+                                    value={this.state.companyName} onChange={this.onChange}></input>
                                 </div>
                         : <br/>
                     }
