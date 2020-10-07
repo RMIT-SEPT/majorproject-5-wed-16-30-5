@@ -7,7 +7,7 @@ import * as BsIcons from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 
-class Sidebar extends Component{
+class SidebarBusiness extends Component{
     render() {
         const SidebarData = [
             {
@@ -17,9 +17,15 @@ class Sidebar extends Component{
                 cName: 'nav-text'
             },
             {
-                title: 'Create',
-                path: '/CreateAppo',
+                title: 'Services',
+                path: '/BusinessServices',
                 icon: <BsIcons.BsPlusCircle />,
+                cName: 'nav-text'
+            },
+            {
+                title: 'Employees',
+                path: '/',
+                icon: <IoIcons.IoMdPeople />,
                 cName: 'nav-text'
             },
             {
@@ -52,4 +58,4 @@ class Sidebar extends Component{
     }
 }
 
-export default Sidebar;
+export default SidebarBusiness;

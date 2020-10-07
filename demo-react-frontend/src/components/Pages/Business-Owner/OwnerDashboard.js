@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Sidebar from '../../Layout/Sidebar/Sidebar.js';
+import SidebarBusiness from "../../Layout/Sidebar/SidebarBusiness.js";
 import Appointments from './Appointments.js';
 
 class OwnerDashboard extends Component {
     render() {
         return (
             <>
-            <Sidebar/>
+            <SidebarBusiness/>
             <Appointments/>
             </>
         );

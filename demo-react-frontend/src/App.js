@@ -20,7 +20,7 @@ import AppoDetails from "./components/Pages/User/AppoDetails.js";
 import CreateAppo from "./components/Pages/User/CreateAppo.js";
 import Profile_Details from "./components/Pages/Profile_Details/Profile_Details";
 import Edit_Profile from "./components/Pages/Profile_Details/Edit_Profile";
-
+import Services from "./components/Pages/Business-Owner/Services"
 import Contact from './components/Pages/Contact/Contact.js';
 import LogOut from './components/Pages/Login/LogOut.js'
 
@@ -37,7 +37,7 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard} />
           
           <Route exact path="/dashboardOwner" component={DashboardOwner} />
-
+          <Route exact path="/BusinessServices" component={Services} />
           <Route exact path="/UserAppo" component={UserAppo} />
           <Route exact path="/CreateAppo" component={CreateAppo} />
           <Route exact path="/appointment/:id" component={AppoDetails} />
