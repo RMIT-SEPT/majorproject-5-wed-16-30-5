@@ -64,10 +64,9 @@ class Login extends Component {
     } else if (this.state.account === "business") {
       fetch(url + "businessOwners/login", requestOptions)
         .then((response) => {
-          console.log(response.status);
-          console.log(response.json());
+          //console.log(response.status);
           if (response.status === 200) {
-            response.json().then((data) => {
+              response.json().then((data) => {
               console.log("data: "+data.token);
               window.sessionStorage.setItem("token", data.token);
               window.sessionStorage.setItem("loggedIn", true);

@@ -85,7 +85,13 @@ class SignUp extends Component {
 
         fetch(url +'businessOwners/register', requestOptions)
             .then(response => {
-                console.log(response)
+                console.log(response.json());
+                if(response.status === 200 || response.status === 201) {
+                    alert("Account successfully created")
+                }
+                else {
+                    
+                }
             })
             .catch(error =>{
                 console.log(error)
