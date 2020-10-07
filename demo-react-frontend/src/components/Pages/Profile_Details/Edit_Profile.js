@@ -41,7 +41,9 @@ class Edit_Profile extends Component
                event.preventDefault();          
                 const changeDetails =
                 {
-                    username: this.state.username.value,
+                    id:'9',
+                    username: this.state.username,
+                    password:'password'
                 }
                 this.edit_Profile(changeDetails);
                 alert("Personal Details successfully updated");
@@ -50,7 +52,7 @@ class Edit_Profile extends Component
              }
 
         getProfileDetails(){
-            axios.get(url + `users/3`)
+            axios.get( url + `users/9`)
              .then(response =>{
                  this.setState({
                     username: response.data.username,
@@ -69,19 +71,21 @@ class Edit_Profile extends Component
             this.reqHeaders();
 
             axios.request({
-                method: 'put',
+                method: 'POST',
                 headers:
-                 { 
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                 {  
+                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                   
                  },
 
-                url: url + `users/3`,
-                data: { changeDetails,
-                },
-                transformRequest:
-                 [(data)=> {return data; }],
-                completed: true,
+                url:    url + `users/register`,
+                body: JSON.stringify({changeDetails})
+                
+                
+                // transformRequest:
+                //  [(data)=> {return data; }],
+                // completed: true,
 
             })
             .then(response => {
@@ -93,21 +97,23 @@ class Edit_Profile extends Component
         }
 
          reqHeaders(){
+            
              let header = new Headers();
 
-             let email = window.sessionStorage.getItem('email');
-            const Cryptr = require('cryptr');
-            const cryptr = new Cryptr('keyword');
+                let email = window.sessionStorage.getItem('email');
+                const Cryptr = require('cryptr');
+                const cryptr = new Cryptr('keyword');
 
-            let encryptedString = window.sessionStorage.getItem('encrypted');
-            const decryptedString = cryptr.decrypt(encryptedString);
-            console.log(decryptedString);
+                let encryptedString = window.sessionStorage.getItem('encrypted');
+                const decryptedString = cryptr.decrypt(encryptedString);
+                console.log(decryptedString);
 
-            let encoded = window.btoa(email + ':' + decryptedString);
-            let auth = 'Basic ' + encoded;
-            header.append('Content-Type', 'application/json');
-            header.append('Accept', 'application/json');
-            header.append('Authorization', auth);
+                let encoded = window.btoa(email + ':' + decryptedString);
+                let auth = 'Basic ' + encoded;
+                header.append('Content-Type', 'application/json');
+                header.append('Accept', 'application/json');
+                header.append('Authorization', auth);
+            
 
         }
 

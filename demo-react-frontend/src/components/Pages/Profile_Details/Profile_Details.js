@@ -24,9 +24,6 @@ console.log(urlAddress.ip);
     //     return axios.get(url + '/' + customerId);
     // }
 
-    // get_Id(id){
-    //     this.props.history.push(`/user/${id}`);
-    // }
 
     // componentDidMount(){
     //     axios.get(url + `/`)
@@ -38,7 +35,7 @@ console.log(urlAddress.ip);
         constructor(props) {
             super(props)
         this.state = {
-            // id:'',
+            id:this.props.match.params.id,
             customerDetail: [],
             errorMsg:'',
 
@@ -48,6 +45,11 @@ console.log(urlAddress.ip);
         this.componentDidMount = this.componentDidMount.bind(this);
 
     }
+
+    // get_Id(id){
+        // this.props.history.push(`/user/${id}`);
+    //     return axios.get( url + `users/${id}`);
+    // }
 
     // componentDidMount() {
     //     const requestDetails = {
@@ -75,10 +77,26 @@ console.log(urlAddress.ip);
     // }
    
     componentDidMount(){
-        // const cus_id = this.props.match.params.id;
+        const id = this.props.match.params.id;
+        // const cus_id = this.get_Id();
         // console.log(cus_id);
         // this.props.history.push(url + `/users/${customer_Id}`);
+        // const requestOptions = {
+        //     method: "POST",
+        //     headers: {
+        //       'Accept': "application/json",
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       username: this.state.username,
+        //       password: this.state.password,
+        //     }),
+        //   };
+      
+        // fetch(url + `users/9`, requestOptions)
         axios.get(url + `users/9`)
+        // axios.get(url + `users/9`)
+
         // axios.get('http://jsonplaceholder.typicode.com/posts/1')
         // axios.get('http://jsonplaceholder.typicode.com/posts/1')
             .then(response =>{
