@@ -12,7 +12,7 @@ class DeleteAccount extends Component
 
  deleteAccount() {
         var msg = window.confirm("This is will delete the account permanently and all it is data and cannot be retrieved after this action");
-        if (msg == true )
+        if (msg === true )
          {
             alert("Account successfully deleted");
             axios.delete(url + `users/8`)

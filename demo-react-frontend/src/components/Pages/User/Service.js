@@ -35,7 +35,7 @@ class Service extends React.Component {
         let auth = 'Basic ' + encoded;
         h.append('Authorization', auth);
 
-        fetch(url, {
+         fetch(url, {
             method: 'GET',
             headers: h
         })

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import {Button, Col, Container, Form} from "react-bootstrap";
+import {Button,  Container} from "react-bootstrap";
 import Sidebar from '../../Layout/Sidebar/Sidebar.js';
-import axios from 'axios';
 import './Profile_Details.css';
 import urlAddress from "../../ip.json";
 
@@ -16,7 +15,7 @@ class Edit_Profile extends Component
         super(props)
 
         this.state = {
-            id: '1',
+            id: '9',
             username: '',
             password:'password'
         }
@@ -42,17 +41,24 @@ class Edit_Profile extends Component
         h.append('Content-Type', 'application/json');
         h.append('Accept', 'application/json');
 
-        fetch(url + 'users/register', {
-            method: 'post',
-            headers: h,
-            body: JSON.stringify({
-                id: this.state.id,
-                username: this.state.username,
-                password: this.state.password,
-                confirmPassword: this.state.password
+        var msg = window.confirm("Are you sure you want to update the details?");
+        if (msg === true )
+         {
+            alert("Personal Details successfully updated");
+            fetch(url + 'users/register', {
+                method: 'post',
+                headers: h,
+                body: JSON.stringify({
+                    id: this.state.id,
+                    username: this.state.username,
+                    password: this.state.password,
+                    confirmPassword: this.state.password
+                })
             })
-        })
     }
+        console.log(this.state);
+    }
+
     componentDidMount() {
     }
 
@@ -71,7 +77,9 @@ class Edit_Profile extends Component
                         
                         <Button
                             className="btn btn-success"
-                            onClick={this.SaveData.bind(this, this.state.id)}>
+                            onClick={this.SaveData.bind(this, this.state.id)}
+                             href="/profile"
+                             >
                             Save
                         </Button>
                     </form>

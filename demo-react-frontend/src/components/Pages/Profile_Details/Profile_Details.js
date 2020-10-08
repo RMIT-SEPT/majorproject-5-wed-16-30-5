@@ -51,30 +51,7 @@ console.log(urlAddress.ip);
     //     return axios.get( url + `users/${id}`);
     // }
 
-    // componentDidMount() {
-    //     const requestDetails = {
-    //         method: 'GET',
-    //         headers: { 
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ 
-    //             customerDetail: this.state.username,
-        
-    //         })
-    //     };
-    //     axios.get(url + `users/3`, requestDetails)  
-    //             .then(response =>{
-    //                 console.log(response.json());
-    //                     this.setState({
-    //                     id: response.data,
-    //                     customerDetail: response.data
-    //                 });
-    //             })
-    //             .catch(error =>{
-    //                 console.log(error)
-    //                 this.setState({errorMsg: 'Cannot get the profile details' })
-    //             })
-    // }
+
    
     componentDidMount(){
         const id = this.props.match.params.id;
@@ -96,9 +73,6 @@ console.log(urlAddress.ip);
         // fetch(url + `users/9`, requestOptions)
         axios.get(url + `users/9`)
         // axios.get(url + `users/9`)
-
-        // axios.get('http://jsonplaceholder.typicode.com/posts/1')
-        // axios.get('http://jsonplaceholder.typicode.com/posts/1')
             .then(response =>{
                 console.log(response)
                 this.setState({

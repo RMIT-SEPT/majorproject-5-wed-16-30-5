@@ -148,7 +148,7 @@ class UApt extends Component {
                         </div>
                         <div className="form-group">
                             <label> Date: </label>
-                            <input placeholder="Date" name="Date" className="form-control"
+                            <input type="date" placeholder="Date" name="Date" className="form-control"
                                 value={this.state.appointmentDate}
                                 onChange={this.changeDateHandler} />
                         </div>

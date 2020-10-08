@@ -24,7 +24,7 @@ class SidebarBusiness extends Component{
             },
             {
                 title: 'Employees',
-                path: '/',
+                path: '/EmployeesPage',
                 icon: <IoIcons.IoMdPeople />,
                 cName: 'nav-text'
             },

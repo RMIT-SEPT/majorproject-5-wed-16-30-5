@@ -22,7 +22,13 @@ import Profile_Details from "./components/Pages/Profile_Details/Profile_Details"
 import Edit_Profile from "./components/Pages/Profile_Details/Edit_Profile";
 import Services from "./components/Pages/Business-Owner/Services"
 import Contact from './components/Pages/Contact/Contact.js';
-import LogOut from './components/Pages/Login/LogOut.js'
+import LogOut from './components/Pages/Login/LogOut.js';
+import EmployeesPage from './components/Pages/Business-Owner/EmployeesPage.js';
+import AddEmployee from './components/Pages/Business-Owner/AddEmployee.js';
+import EditEmployee from './components/Pages/Business-Owner/EditEmployee.js';
+
+
+
 
 
 
@@ -57,6 +63,12 @@ function App() {
           
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/LogOut" component={LogOut} />
+          <Route exact path="/EmployeesPage" component={EmployeesPage} />
+          <Route exact path="/EmployeeList/AddEmployee" component={AddEmployee} />
+          <Route exact path="/EmployeeList/EditEmployee" component={EditEmployee} />
+
+
+
 
         </div>
       </Router>
