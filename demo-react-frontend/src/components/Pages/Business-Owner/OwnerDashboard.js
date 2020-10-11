@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import SidebarBusiness from "../../Layout/Sidebar/SidebarBusiness.js";
 import Appointments from './Appointments.js';
+import { Container } from "react-bootstrap";
 
 class OwnerDashboard extends Component {
     render() {
         return (
-            <>
-            <SidebarBusiness/>
-            <Appointments/>
-            </>
+            <Container fluid style={{ padding: '0rem' }}>
+                <SidebarBusiness />
+                <div style={{ marginLeft: '25%' }}>
+                    <Appointments />
+                </div>
+            </Container>
         );
     }
 }

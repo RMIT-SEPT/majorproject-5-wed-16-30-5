@@ -69,7 +69,7 @@ class Login extends Component {
               response.json().then((data) => {
               console.log("data: "+data.token);
               window.sessionStorage.setItem("token", data.token);
-              window.sessionStorage.setItem("loggedIn", true);
+              window.sessionStorage.setItem("business", true);
               this.props.history.push("/dashboardOwner");
               window.location.reload(true);
             });

@@ -11,29 +11,24 @@ class SidebarBusiness extends Component{
     render() {
         const SidebarData = [
             {
-                title: 'Appointments',
-                path: '/UserAppo',
-                icon: <IoIcons.IoIosPaper />,
+                title: 'My Services',
+                path: '/BusinessServices',
+                icon: <BsIcons.BsCardChecklist />,
                 cName: 'nav-text'
             },
             {
-                title: 'Services',
-                path: '/BusinessServices',
-                icon: <BsIcons.BsPlusCircle />,
+                title: 'Appointments',
+                path: '/dashboardOwner',
+                icon: <IoIcons.IoIosPaper />,
                 cName: 'nav-text'
             },
+            
             {
                 title: 'Employees',
                 path: '/EmployeesPage',
                 icon: <IoIcons.IoMdPeople />,
                 cName: 'nav-text'
             },
-            {
-                title: 'Profile',
-                path: '/profile',
-                icon: <BsIcons.BsPersonFill />,
-                cName: 'nav-text'
-            }
         ];
         return (
             <div className='sidebar'>

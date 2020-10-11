@@ -1,84 +1,158 @@
-import React from 'react';
+import React, { Component } from 'react'
 import './Appointments.css';
 import * as IoIcons from 'react-icons/io';
-import { IconContext } from 'react-icons';
-import { Link } from 'react-router-dom';
-import { FaBorderNone } from 'react-icons/fa';
-import { Button } from "react-bootstrap";
+import Sidebar from '../../Layout/Sidebar/SidebarBusiness';
+import { Button, Container } from "react-bootstrap";
+import urlAddress from '../../ip.json';
 
-const url = '/api/appointment/all';
+const url = 'http://' + urlAddress.ip + ':8080/api/appointment';
 
-class ADetails extends React.Component {
+class ADetails extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
-            appointments: [],
-            appointmentIdentifier: '',
+            appointmentIdentifier: this.props.match.params.id,
+            id: '',
             appointmentName: '',
             description: '',
+            appointmentDate: '',
             appointmentOwner: ''
-        };
+        }
+        this.SaveData = this.SaveData.bind(this);
+        this.changeNameHandler = this.changeNameHandler.bind(this);
+        this.changeDesHandler = this.changeDesHandler.bind(this);
+        this.changeDateHandler = this.changeDateHandler.bind(this);
     }
-
-
 
     fetchData() {
 
         let h = new Headers();
-        h.append('Accept', 'application/json');
 
-        let encoded = window.btoa('email@email.com:password');
+        
+        let encoded = window.btoa("email22@email.com:password");
         let auth = 'Basic ' + encoded;
+        h.append('Accept', 'application/json');
         h.append('Authorization', auth);
 
-        fetch(url, {
+        fetch(url + '/' + this.state.appointmentIdentifier, {
             method: 'GET',
             headers: h
         })
             .then(res => res.json())
             .then(json => {
-                this.setState({ appointments: json });
+                this.setState({
+                    id: json.id,
+                    appointmentIdentifier: json.appointmentIdentifier,
+                    appointmentName: json.appointmentName,
+                    description: json.description,
+                    appointmentDate: json.appointmentDate
+                });
 
             });
+    }
+    changeNameHandler = (event) => {
+        this.setState({ appointmentName: event.target.value });
+    }
+    changeDesHandler = (event) => {
+        this.setState({ description: event.target.value });
+    }
+    changeDateHandler = (event) => {
+        this.setState({ appointmentDate: event.target.value });
+    }
+    validate = () => {
+        let nameError = '';
+        let desError = '';
+        let dateError = '';
+
+
+        if (!this.state.appointmentName) {
+            nameError = "*This field is empty";
+        }
+        if (!this.state.description) {
+            desError = "*This field is empty";
+        }
+        if (!this.state.appointmentDate) {
+            dateError = "*This field is empty";
+        }
+
+
+        if (nameError || desError || dateError) {
+            this.setState({ nameError, desError, dateError });
+            return false
+        }
+        return true
+    }
+    handleSubmit = event => {
+        event.preventDefault();
+        const isValid = this.validate();
+        if (isValid) {
+            console.log(this.state);
+        }
+    }
+    SaveData() {
+        let h = new Headers();
+        let email = window.sessionStorage.getItem('email');
+        const Cryptr = require('cryptr');
+        const cryptr = new Cryptr('keyword');
+        let encryptedString = window.sessionStorage.getItem('encrypted');
+        const decryptedString = cryptr.decrypt(encryptedString);
+        console.log(decryptedString);
+        let encoded = window.btoa(email + ':' + decryptedString);
+        let auth = 'Basic ' + encoded;
+        h.append('Content-Type', 'application/json');
+        h.append('Accept', 'application/json');
+        h.append('Authorization', auth);
+
+        fetch(url + '/', {
+            method: 'post',
+            headers: h,
+            body: JSON.stringify({
+                id: this.state.id,
+                appointmentIdentifier: this.state.appointmentIdentifier,
+                appointmentDate: this.state.appointmentDate,
+                appointmentName: this.state.appointmentName,
+                description: this.state.description
+            })
+        }).then(json => this.fetchData()).then(console.log(this.state))
     }
     componentDidMount() {
         this.fetchData();
     }
 
     render() {
-        let ap = Object.entries(this.state.appointments);
 
         return (
-            <div classname='container' style={{ marginLeft: '400px' }}>
-                <h1><IoIcons.IoIosPaper /> Appointments</h1>
-                <table style={{ width: '700px' }}>
-                    <thead>
-                        <tr>
-                            <td> User Email</td>
-                            <td> Appointment</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.appointments.map(a =>
-                            <tr
-                                className='appo'
-                                key={a.appointmentIdentifier} >
+            <Container fluid style={{ padding: '0rem' }}>
+                <Sidebar />
+                <div style={{ marginLeft: '25%' }}>
+                    <h1><IoIcons.IoIosPaper /> Appointment Id: {this.state.appointmentIdentifier}</h1>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label> Name: </label>
+                            <input type="text" placeholder="Name" name="appointmentName" className="form-control"
+                                value={this.state.appointmentName} onChange={this.changeNameHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Description: </label>
+                            <input placeholder="Description" name="Description" className="form-control"
+                                value={this.state.description}
+                                onChange={this.changeDesHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Date: </label>
+                            <input type="date" placeholder="Date" name="Date" className="form-control"
+                                value={this.state.appointmentDate}
+                                onChange={this.changeDateHandler} />
+                        </div>
+                        <Button
+                            className="btn btn-success"
+                            onClick={this.SaveData.bind(this, this.state.id)}
+                            href="/UserAppo">Save</Button>
+                    </form>
 
-                                <td> {a.appointmentOwner}</td>
-                                <td> {a.appointmentName}</td>
-                                <td className='edt'>
-                                    <Button
-                                        href={`/appointment/${a.appointmentIdentifier}`}
-                                        style={{ float: 'right' }}>Edit</Button>
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-
-            </div>
-
+                </div>
+            </Container>
         )
     }
 }

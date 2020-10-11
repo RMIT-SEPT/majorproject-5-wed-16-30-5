@@ -8,7 +8,8 @@ class Navbar extends Component {
         super(props);
         this.state = {
             click: false,
-            loggedIn: this.props.loggedIn
+            loggedIn: this.props.loggedIn,
+            business: this.props.business
         }
     }
     
@@ -53,6 +54,36 @@ class Navbar extends Component {
                 {
                     title: 'Home',
                     url: '/UserAppo',
+                    cName: 'nav-links',
+                },
+                {
+                    title: 'About',
+                    url: '/about',
+                    cName: 'nav-links',
+                },
+                {
+                    title: 'Services',
+                    url: '/serviceDash',
+                    cName: 'nav-links',
+                },
+                {
+                    title: 'Contact us',
+                    url: '/contact',
+                    cName: 'nav-links',
+                },
+                {
+                    title: 'Logout',
+                    url: '/LogOut',
+                    icon: <Icons.BsBoxArrowRight />,
+                    cName: 'nav-links-logout',
+                }
+            ]
+        }
+        else if (window.sessionStorage.getItem('business')=='true') {
+            MenuItems = [
+                {
+                    title: 'Home',
+                    url: '/dashboardOwner',
                     cName: 'nav-links',
                 },
                 {

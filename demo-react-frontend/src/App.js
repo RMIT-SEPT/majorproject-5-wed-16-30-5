@@ -26,11 +26,7 @@ import LogOut from './components/Pages/Login/LogOut.js';
 import EmployeesPage from './components/Pages/Business-Owner/EmployeesPage.js';
 import AddEmployee from './components/Pages/Business-Owner/AddEmployee.js';
 import EditEmployee from './components/Pages/Business-Owner/EditEmployee.js';
-
-
-
-
-
+import ADetails from "./components/Pages/Business-Owner/ADetails.js";
 
 function App() {
 
@@ -47,7 +43,7 @@ function App() {
           <Route exact path="/UserAppo" component={UserAppo} />
           <Route exact path="/CreateAppo" component={CreateAppo} />
           <Route exact path="/appointment/:id" component={AppoDetails} />
-
+          <Route exact path="/businessAppo/:id" component={ADetails} />
           <Route exact path="/serviceDash" component={serviceDash} />
 
           <Route exact path="/addProject" component={AddProject} />
