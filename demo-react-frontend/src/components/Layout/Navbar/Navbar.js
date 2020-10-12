@@ -18,36 +18,6 @@ class Navbar extends Component {
     }
 
     render() {
-        /*
-        const MenuItems = [
-            {
-                title: 'Home',
-                url: '/UserAppo',
-                cName: 'nav-links',
-            },
-            {
-                title: 'About',
-                url: '/about',
-                cName: 'nav-links',
-            },
-            {
-                title: 'Services',
-                url: '/serviceDash',
-                cName: 'nav-links',
-            },
-            {
-                title: 'Contact us',
-                url: '#',
-                cName: 'nav-links',
-            },
-            {
-                title: 'Login',
-                url: '/login.html',
-                icon: <Icons.BsPeopleCircle />,
-                cName: 'nav-links-login',
-            }
-        ]
-        */
         var MenuItems = []
         if (this.state.loggedIn) {
             MenuItems = [
