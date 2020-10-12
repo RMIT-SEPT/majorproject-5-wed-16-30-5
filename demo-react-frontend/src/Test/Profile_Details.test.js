@@ -1,35 +1,23 @@
 import React from 'react';
-// import 'react-native';
-import  '../components/Pages/Profile-Details/Profile_Details';
+import  '../components/Pages/Profile_Details/Profile_Details';
 import {shallow, mount} from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
-import { render } from '@testing-library/react';
-// import ReactDOM from 'react-dom';
-// import 'jest-dom/extends-expect';
-// import sinon from 'sinon';
-// import { expect } from 'chai';
-
 
 
 Enzyme.configure({ adapter: new Adapter() });
 
-//Tests will pass for Js format
 describe(" Profile_Details unit Test", ()=> {
     //Tests will pass for props
     it("Should return all constructor props correctly", ()=>{
-        
         const eData = shallow(< Profile-Details email= "d@hotmail.come" />).props();
         const aData = shallow(< Profile-Details address= "00 Barak st" />).props();
         const fData = shallow(< Profile-Details fName= "Jon" />).props();
         const lData = shallow(< Profile-Details lName= "Derake" />).props();
         const bData = shallow(< Profile-Details dateOfBirth= "15/02/1998" />).props();
         const pData = shallow(< Profile-Details phone= "00000-00000" />).props();
-
         console.warn(eData,aData,fData,lData,bData,pData);
         expect(1).toEqual(1);
-
         
     });
 
@@ -67,7 +55,6 @@ it("Return matched and correct personal inforamtion", ()=>{
     expect(Data.dateOfBirth).toBe('12/04/1993');
     expect(Data.address).toBe('55 Flinders st');
     expect(Data.phone).toBe('0000055555');
-    // console.info(" all the values are matched with the personal data");
     
 });
 
@@ -89,7 +76,6 @@ it("Return unmatched and incorrect personal inforamtion", ()=>{
     expect(Data.dateOfBirth).toBe('12/04/1993');
     expect(Data.address).toBe('5 Flinders st');
     expect(Data.phone).toBe('0000055555');
-    // console.warn(" Some of the values are not matched with the personal data");
 
 });
 

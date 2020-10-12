@@ -5,8 +5,6 @@ import CreateEditButton from './CreateEditButton'
 import Sidebar from '../../Layout/Sidebar/Sidebar.js';
 import axios from 'axios';
 import urlAddress from "../../ip.json";
-import * as BsIcons from 'react-icons/bs';
-import * as IoIcons from 'react-icons/io';
 import './Profile_Details.css';
 
 
@@ -14,24 +12,6 @@ const url = 'http://'+urlAddress.ip+':8080/api/';
 console.log(urlAddress.ip);
 
      class Profile_Details extends Component{
-  
-      // getCustomer(){
-    //     return axios.get(url);
-    // }
-
-
-    // getCustomerById(customerId){
-    //     return axios.get(url + '/' + customerId);
-    // }
-
-
-    // componentDidMount(){
-    //     axios.get(url + `/`)
-    //     .then((response) => {
-    //         this.setState({ customerDetail: response.data});
-    //     });
-    // }
-
         constructor(props) {
             super(props)
         this.state = {
@@ -40,39 +20,14 @@ console.log(urlAddress.ip);
             errorMsg:'',
 
         }
-        // this.get_Id = this.get_Id.bind(this);
-        // this.customer = this.customer.bind(this);
+      
         this.componentDidMount = this.componentDidMount.bind(this);
 
     }
 
-    // get_Id(id){
-        // this.props.history.push(`/user/${id}`);
-    //     return axios.get( url + `users/${id}`);
-    // }
-
-
-   
     componentDidMount(){
         const id = this.props.match.params.id;
-        // const cus_id = this.get_Id();
-        // console.log(cus_id);
-        // this.props.history.push(url + `/users/${customer_Id}`);
-        // const requestOptions = {
-        //     method: "POST",
-        //     headers: {
-        //       'Accept': "application/json",
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       username: this.state.username,
-        //       password: this.state.password,
-        //     }),
-        //   };
-      
-        // fetch(url + `users/9`, requestOptions)
-        axios.get(url + `users/9`)
-        // axios.get(url + `users/9`)
+        axios.get(url + `users/11`)
             .then(response =>{
                 console.log(response)
                 this.setState({

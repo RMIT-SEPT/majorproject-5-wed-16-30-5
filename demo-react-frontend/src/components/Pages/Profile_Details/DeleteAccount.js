@@ -15,7 +15,7 @@ class DeleteAccount extends Component
         if (msg === true )
          {
             alert("Account successfully deleted");
-            axios.delete(url + `users/8`)
+            axios.delete(url + `users/15`)
             .then(response =>{
                 console.log(response)
             })

@@ -10,7 +10,7 @@ describe("<Login /> component Unit Test", () => {
     it("Should render one component", ()=> {
         const component = shallow(<Login />);
         expect(component).toHaveLength(1);
-    })
+    });
 
     it('POST API call when button pressed form filled in', () => {
         const mockFn = jest.fn();
@@ -25,7 +25,7 @@ describe("<Login /> component Unit Test", () => {
         
         button.simulate('click');
         expect(mockFn).toHaveBeenCalled();
-    })
+    });
 
     it('POST API call with no email', () => {
         const mockFn = jest.fn();
@@ -40,7 +40,7 @@ describe("<Login /> component Unit Test", () => {
         
         button.simulate('click');
         expect(mockFn).not.toHaveBeenCalled();
-    })
+    });
     
     it('POST API call with no password', () => {
         const mockFn = jest.fn();
@@ -55,7 +55,7 @@ describe("<Login /> component Unit Test", () => {
         
         button.simulate('click');
         expect(mockFn).not.toHaveBeenCalled();
-    })
+    });
 
     it('POST API call with account type not selected', () => {
         const mockFn = jest.fn();
@@ -70,6 +70,6 @@ describe("<Login /> component Unit Test", () => {
         
         button.simulate('click');
         expect(mockFn).not.toHaveBeenCalled();
-    })
+    });
     
-})
+});
