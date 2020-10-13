@@ -15,6 +15,8 @@ describe("<Navbar /> Navigation bar Unit Test", () => {
 
         expect(component.find('ul > li > a').at(0).prop('href')).toBe('/about');
 
+        // expect(text.text()).toBe(' Appointments');
+        // console.log(text.text());
     });
     it('should render to Services page', () => {
         const component = mount(<Navbar />);

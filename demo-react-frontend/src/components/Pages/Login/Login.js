@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Login.css";
 import urlAddress from "../../ip.json";
 
+
 const url = "http://" + urlAddress.ip + ":8080/api/";
 
 class Login extends Component {
@@ -12,6 +13,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
+      id:"",
       username: "",
       password: "",
       account: "",
@@ -27,6 +29,7 @@ class Login extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        id:this.state.id,
         username: this.state.username,
         password: this.state.password,
       }),
@@ -49,6 +52,9 @@ class Login extends Component {
 
               const encryptedString = cryptr.encrypt(this.state.password);
               window.sessionStorage.setItem("encrypted", encryptedString);
+
+              const encryptedId = cryptr.encrypt(this.state.id);
+              window.sessionStorage.setItem("id", encryptedId)
 
               this.props.history.push("/UserAppo");
               window.location.reload(true);

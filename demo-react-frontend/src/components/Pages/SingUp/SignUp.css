@@ -1,8 +1,8 @@
 .register{
-  width: 360px;
+  width: 390px;
   background: #f1f1f1;
-  height: 580px;
-  padding: 80px 40px;
+  height: 585px;
+  padding: 5px 40px;
   border-radius: 10px;
   position: absolute;
   left: 50%;
@@ -11,7 +11,7 @@
 }
 .register h1{
     text-align: center;
-    margin-top: -50px;
+    margin-top: -45px;
     color: #201e3b;
 }
 .form-group-register{
