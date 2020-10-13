@@ -38,6 +38,7 @@ public class ServiceService {
             for (Appointment a : service.getAppointments()) {
                 Appointment tempAppo = appointmentRepo.findByAppointmentIdentifier(a.getAppointmentIdentifier());
                 tempAppo.setServiceName(service.getServiceIdentifier());
+                tempAppo.setServiceIdentifier(identifier);
                 appointmentRepo.save(tempAppo);
                 temp.add(tempAppo);
             }
