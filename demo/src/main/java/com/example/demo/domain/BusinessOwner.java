@@ -1,6 +1,8 @@
 package com.example.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +37,13 @@ public class BusinessOwner implements UserDetails {
 
     private Date created_At;
     private Date updated_At;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "businessOwner", orphanRemoval = true)
+    private List<Service> services = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REFRESH, mappedBy = "businessOwner", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Worker> workers = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {
@@ -105,6 +114,21 @@ public class BusinessOwner implements UserDetails {
         this.updated_At = updated_At;
     }
 
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(List<Worker> workers) {
+        this.workers = workers;
+    }
     // UserDetails interface method
 
 

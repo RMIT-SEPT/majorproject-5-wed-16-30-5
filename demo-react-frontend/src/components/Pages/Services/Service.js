@@ -53,7 +53,7 @@ class Service extends React.Component {
 
         return (
             <div classname='container' style={{ }}>
-                <h1><BsIcons.BsCardChecklist /> Services</h1>
+                <h1><BsIcons.BsCardChecklist /> Available Services</h1>
                 <table style={{ width: '700px' }}>
                     <thead>
                         <tr>

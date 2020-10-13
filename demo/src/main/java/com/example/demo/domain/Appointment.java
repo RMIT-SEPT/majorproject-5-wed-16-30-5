@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -38,7 +39,21 @@ public class Appointment {
     @JsonIgnore
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonIgnore
+    private Service service;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Worker worker;
+
+    private String workerName;
+
+    private String serviceName;
+
     private String appointmentOwner;
+
+    private Time appointmentTime;
 
     public Appointment() {
     }
@@ -145,5 +160,45 @@ public class Appointment {
                 ", updated_At=" + updated_At +
                 ", appointmentTaskList=" + appointmentTaskList +
                 '}';
+    }
+
+    public Time getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(Time appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getWorkerName() {
+        return workerName;
+    }
+
+    public void setWorkerName(String workerName) {
+        this.workerName = workerName;
     }
 }

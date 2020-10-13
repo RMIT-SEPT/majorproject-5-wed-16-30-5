@@ -148,7 +148,7 @@ class SignUp extends Component {
                     }
 
                    <Button id="submitD"onClick={this.onSubmit} type="submit" value="Submit" className="logbtn">
-                            Register
+                       Register
                     </Button>
                 </form>
            </Container>

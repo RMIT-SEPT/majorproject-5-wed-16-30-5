@@ -46,6 +46,16 @@ public class UserService {
         return newUser;
     }
 
+    public User findUserByUsername(String username){
+        User newUser = userRepo.findByUsername(username);
+
+        if(newUser == null){
+            throw new UserNotFoundException("User not found");
+        }
+
+        return newUser;
+    }
+
     public User deleteUserById(Long id){
         User user = userRepo.getById(id);
 
