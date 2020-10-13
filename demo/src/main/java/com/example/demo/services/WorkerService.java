@@ -43,6 +43,7 @@ public class WorkerService {
             for(Appointment a : worker.getAppointments()) {
                 Appointment tempAppo = appointmentRepo.findByAppointmentIdentifier(a.getAppointmentIdentifier());
                 tempAppo.setWorkerName(worker.getWorkerIdentifier());
+                tempAppo.setWorkerIdentifier(identifier);
                 appointmentRepo.save(tempAppo);
                 temp.add(tempAppo);
             }

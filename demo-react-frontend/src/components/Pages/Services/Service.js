@@ -6,21 +6,16 @@ import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import { FaBorderNone } from 'react-icons/fa';
 import { Button } from "react-bootstrap";
+import urlAddress from '../../ip.json';
 
-const url = '/api/appointment/all';
+const url = 'http://' + urlAddress.ip + ':8080/api/service/s123';
 
-// let ip = require("../../ip.json");
-// const url = "http://" + ip.ip + ":8080/api/appointment/all";
 class Service extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            appointments: [],
-            appointmentIdentifier: '',
-            appointmentName: '',
-            description: '',
-            appointmentOwner: ''
+            appointments: []
         };
     }
 
@@ -28,22 +23,21 @@ class Service extends React.Component {
 
     fetchData() {
 
+        let encoded = window.btoa("owner@email.com:password");
+        let auth = 'Basic ' + encoded;
         let h = new Headers();
         h.append('Accept', 'application/json');
-
-        let encoded = window.btoa('email@email.com:password');
-        let auth = 'Basic ' + encoded;
         h.append('Authorization', auth);
-
-         fetch(url, {
+        h.append("Access-Control-Allow-Origin", "*")
+        fetch(url, {
             method: 'GET',
             headers: h
         })
             .then(res => res.json())
             .then(json => {
-                this.setState({ appointments: json });
-
-            });
+                this.setState({ appointments: json.appointments });
+                console.log(this.state.appointments)
+            })
     }
     componentDidMount() {
         this.fetchData();
@@ -52,14 +46,13 @@ class Service extends React.Component {
     render() {
 
         return (
-            <div classname='container' style={{ }}>
+            <div className='container' style={{ marginLeft: '25%' }}>
                 <h1><BsIcons.BsCardChecklist /> Available Services</h1>
                 <table style={{ width: '700px' }}>
                     <thead>
                         <tr>
                             <td> Name</td>
                             <td> Description</td>
-                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,13 +61,8 @@ class Service extends React.Component {
                                 className='appo'
                                 key={a.appointmentIdentifier} >
 
-                                <td> {a.appointmentOwner}</td>
                                 <td> {a.appointmentName}</td>
-                                <td className='edt'>
-                                    <Button
-                                        href={`/appointment/${a.appointmentIdentifier}`}
-                                        style={{ float: 'right' }}>Edit</Button>
-                                </td>
+                                <td> {a.appointmentDate}</td>
                             </tr>
                         )}
                     </tbody>

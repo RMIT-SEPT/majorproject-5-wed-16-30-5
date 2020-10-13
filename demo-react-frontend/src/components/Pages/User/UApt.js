@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './Services.css';
 import { Button } from "react-bootstrap";
-import * as BsIcons from 'react-icons/bs';
 import * as IoIcons from 'react-icons/io';
 import urlAddress from '../../ip.json';
+import Sidebar from '../../Layout/Sidebar/Sidebar.js';
 
 const url = 'http://'+urlAddress.ip+':8080/api/appointment/';
 console.log(urlAddress.ip)
@@ -79,7 +79,9 @@ class UApt extends Component {
 
     render() {
         return (
-            <div >
+            <>
+            <Sidebar/>
+            <div style={{ marginLeft: '25%' }}>
                 <h1><IoIcons.IoIosPaper /> Appointments</h1>
                 <table style={{ width: '700px' }} >
                     <thead>
@@ -113,7 +115,7 @@ class UApt extends Component {
                 </table>
 
             </div>
-
+            </>
         )
     }
 }

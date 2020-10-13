@@ -1,17 +1,16 @@
 package com.example.demo.services;
 
-import com.example.demo.domain.Appointment;
-import com.example.demo.domain.AppointmentTaskList;
-import com.example.demo.domain.User;
+import com.example.demo.domain.*;
 import com.example.demo.exceptions.AppointmentIdException;
 import com.example.demo.exceptions.AppointmentNotFoundException;
-import com.example.demo.repo.AppointmentTaskListRepo;
-import com.example.demo.repo.AppointmentRepo;
-import com.example.demo.repo.UserRepo;
+import com.example.demo.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.ArrayList;
+import java.util.List;
+//import org.springframework.stereotype.Service;
+
+@org.springframework.stereotype.Service
 public class AppointmentService {
 
     @Autowired
@@ -19,6 +18,12 @@ public class AppointmentService {
 
     @Autowired
     private AppointmentTaskListRepo appointmentTaskListRepo;
+
+    @Autowired
+    private ServiceRepo serviceRepo;
+
+    @Autowired
+    private WorkerRepo workerRepo;
 
     @Autowired
     private UserRepo userRepo;
@@ -55,6 +60,28 @@ public class AppointmentService {
             if(appointment.getId() != null){
                 appointment.setCreated_At(appointmentRepo.findByAppointmentIdentifier(identifier).getCreated_At());
                 appointment.setAppointmentTaskList(appointmentTaskListRepo.findByAppointmentIdentifier(identifier));
+            }
+
+            if (appointment.getServiceIdentifier() != null) {
+                Service s = serviceRepo.findByServiceIdentifier(appointment.getServiceIdentifier().toUpperCase());
+                List<Appointment> tempAppos = s.getAppointments();
+                tempAppos.add(appointment);
+                s.setAppointments(tempAppos);
+                appointment.setServiceIdentifier(appointment.getServiceIdentifier().toUpperCase());
+                appointment.setService(s);
+                appointment.setServiceName(s.getServiceName());
+                serviceRepo.save(s);
+            }
+
+            if (appointment.getWorkerIdentifier() != null) {
+                Worker w = workerRepo.findByWorkerIdentifier(appointment.getWorkerIdentifier());
+                List<Appointment> tempAppos = w.getAppointments();
+                tempAppos.add(appointment);
+                w.setAppointments(tempAppos);
+                appointment.setWorkerIdentifier(appointment.getWorkerIdentifier().toUpperCase());
+                appointment.setWorker(w);
+                appointment.setWorkerName(w.getWorkerName());
+                workerRepo.save(w);
             }
             return appointmentRepo.save(appointment);
 

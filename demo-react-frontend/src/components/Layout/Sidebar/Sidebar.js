@@ -38,6 +38,12 @@ class Sidebar extends Component{
                     cName: 'nav-text'
                 },
                 {
+                    title: 'Create Service',
+                    path: '/CreateService',
+                    icon: <BsIcons.BsPlusCircle />,
+                    cName: 'nav-text'
+                },
+                {
                     title: 'Appointments',
                     path: '/dashboardOwner',
                     icon: <IoIcons.IoIosPaper />,

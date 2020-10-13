@@ -7,7 +7,7 @@ import urlAddress from '../../ip.json';
 const url = 'http://' + urlAddress.ip + ':8080/api/appointment/';
 console.log(urlAddress.ip)
 
-class Services extends Component {
+class MyServices extends Component {
 
     constructor(props) {
         super(props)
@@ -22,7 +22,7 @@ class Services extends Component {
     }
     fetchData() {
 
-        let encoded = window.btoa("email22@email.com:password");
+        let encoded = window.btoa("email@email.com:password");
         let auth = 'Basic ' + encoded;
         let h = new Headers();
         h.append('Accept', 'application/json');
@@ -108,4 +108,4 @@ class Services extends Component {
     }
 }
 
-export default Services;
+export default MyServices;

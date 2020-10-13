@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import './Services.css';
+import './Appointments.css';
 import { Button } from "react-bootstrap";
 import * as IoIcons from 'react-icons/io';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import urlAddress from '../../ip.json';
 
-const url = 'http://'+urlAddress.ip+':8080/api/appointment/';
+const url = 'http://' + urlAddress.ip + ':8080/api/appointment/';
 
-class CreateAppo extends Component {
+class CreateService extends Component {
     constructor(props) {
         super(props)
 
@@ -77,7 +77,7 @@ class CreateAppo extends Component {
                         <div className="form-group">
                             <label> Appointment Id: </label>
                             <input type="text" placeholder="appointmentIdentifier" name="appointmentIdentifier" className="form-control"
-                                value={this.state.appointmentIdentifier}/>
+                                value={this.state.appointmentIdentifier} />
                         </div>
                         <div className="form-group">
                             <label> Name: </label>
@@ -98,7 +98,7 @@ class CreateAppo extends Component {
                             className="btn btn-success"
                             onClick={this.SaveData.bind(this)}
                             href='/UserAppo'
-                            >Save</Button>
+                        >Save</Button>
                     </form>
                 </div>
             </>
@@ -106,4 +106,4 @@ class CreateAppo extends Component {
     }
 }
 
-export default CreateAppo
+export default CreateService
