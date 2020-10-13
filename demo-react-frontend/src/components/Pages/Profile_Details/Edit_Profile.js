@@ -15,9 +15,12 @@ class Edit_Profile extends Component
         super(props)
 
         this.state = {
-            id: '11',
-            username: '',
-            password:'password'
+            id: '1',
+            username: 'cus@come',
+            password:'password',
+            fullname: '',
+            address:'',
+            phoneNumber: '',
         }
         this.SaveData = this.SaveData.bind(this);
         this.changeNameHandler = this.changeNameHandler.bind(this);
@@ -25,8 +28,7 @@ class Edit_Profile extends Component
 
     
     changeNameHandler = (event) => {
-        this.setState({ username: event.target.value });
-    }
+        this.setState({ [event.target.name]: event.target.value });    }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -52,15 +54,16 @@ class Edit_Profile extends Component
                     id: this.state.id,
                     username: this.state.username,
                     password: this.state.password,
-                    confirmPassword: this.state.password
+                    confirmPassword: this.state.password,
+                    fullname: this.state.fullname,
+                    address:this.state.address,
+                    phoneNumber: this.state.phoneNumber 
                 })
             })
     }
         console.log(this.state);
     }
 
-    componentDidMount() {
-    }
 
     render() {
 
@@ -70,9 +73,20 @@ class Edit_Profile extends Component
                 <div style={{ marginLeft: '25%' }}>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <label> username: </label>
-                            <input type="text" placeholder="Name" name="username" className="form-control"
-                                value={this.state.username} onChange={this.changeNameHandler} />
+                            <label> Name: </label>
+                            <input type="text" placeholder="Name" name="fullname" className="form-control"
+                                value={this.state.fullname} onChange={this.changeNameHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Phone: </label>
+                            <input type="text" placeholder="valid phone number" name="phoneNumber" className="form-control"
+                                value={this.state.phoneNumber} onChange={this.changeNameHandler} />
+                        </div>
+
+                        <div className="form-group">
+                            <label> Address: </label>
+                            <input type="text" placeholder="Address" name="address" className="form-control"
+                                value={this.state.address} onChange={this.changeNameHandler} />
                         </div>
                         
                         <Button

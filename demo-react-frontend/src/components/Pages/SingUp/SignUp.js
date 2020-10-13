@@ -16,11 +16,12 @@ class SignUp extends Component {
             password: '',
             confirmPassword: '',
             type: 'customer',
-            companyName: ''
+            companyName: '',
+            fullname:'',
+            address:'',
+            phoneNumber: ''
         };
         
-        // this.handleChange = this.handleChange.bind(this);
-
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -50,7 +51,11 @@ class SignUp extends Component {
             body: JSON.stringify({ 
                 username: this.state.email,
                 password: this.state.password,
-                confirmPassword: this.state.confirmPassword
+                confirmPassword: this.state.confirmPassword,
+                fullname: this.state.fullname,
+                address:this.state.address,
+                phoneNumber: this.state.phoneNumber 
+
             })
         };
 
@@ -79,7 +84,8 @@ class SignUp extends Component {
                 username: this.state.email,
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword,
-                companyName: this.state.companyName
+                companyName: this.state.companyName,
+
             })
         };
 
@@ -123,6 +129,24 @@ class SignUp extends Component {
                         <br/>
                         <input type="text" placeholder="Re-enter Password" 
                             name="confirmPassword" value={this.state.confirmPassword} onChange={this.onChange}></input>
+                    </div>
+
+                    <div className="form-group-register">
+                        <br/>
+                        <input type="text" placeholder="Full Name" 
+                            name="fullname" value={this.state.fullname} onChange={this.onChange}></input>
+                    </div>
+
+                    <div className="form-group-register">
+                        <br/>
+                        <input type="phone" placeholder="Phone Number" 
+                            name="phoneNumber" value={this.state.phoneNumber} onChange={this.onChange}></input>
+                    </div>
+
+                    <div className="form-group-register">
+                        <br/>
+                        <input type="text" placeholder="Home Address" 
+                            name="address" value={this.state.address} onChange={this.onChange}></input>
                     </div>
 
                     <div className="form-group-acc">

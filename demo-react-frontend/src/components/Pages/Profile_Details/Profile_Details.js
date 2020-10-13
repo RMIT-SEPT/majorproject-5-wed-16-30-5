@@ -6,6 +6,8 @@ import Sidebar from '../../Layout/Sidebar/Sidebar.js';
 import axios from 'axios';
 import urlAddress from "../../ip.json";
 import './Profile_Details.css';
+import jwt_decode from "jwt-decode";
+
 
 
 const url = 'http://'+urlAddress.ip+':8080/api/';
@@ -26,10 +28,21 @@ console.log(urlAddress.ip);
     }
 
     componentDidMount(){
-        const id = this.props.match.params.id;
-        axios.get(url + `users/11`)
+        const cu_id = this.props.match.params.id;
+        axios.get(url + `users/1`)
+        // axios.get(url + `users/${cu_id}`)
             .then(response =>{
-                console.log(response)
+                console.log(response);
+
+                // window.sessionStorage.setItem("token", response.data.token);
+                // window.sessionStorage.setItem("id", encryptedId);
+                // const decodedId =  jwt_decode(token);
+                // console.log(decoded);
+                // window.sessionStorage.setItem("id", decodedId);
+
+                // var decodedHeader = jwt_decode(token, { header: true });
+                // console.log(decodedHeader);
+               
                 this.setState({
                     id: response.data,
                     customerDetail: response.data
@@ -53,7 +66,7 @@ console.log(urlAddress.ip);
                 <h1>Profile Details</h1>  
                     <h4>Personal information</h4>
                     <hr></hr>
-                    <h6>User name </h6>
+                    <h6 style={{color: "white"}}>Email: </h6>
 
                     {/* <ul>
                      {this.state.customerDetail.map(detail =>(
@@ -61,18 +74,15 @@ console.log(urlAddress.ip);
                      ))}
                    </ul> */}
 
-                     <h6 key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6> 
-                    <h6>Last name</h6> 
-                     {/* <h6 key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6>
-                    <h6>Email</h6>
-                     <h6 key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6> */}
-                    <h6>Phone number</h6>
-                    <h6>Date of birth</h6>
-                    <hr></hr>
+                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6> 
+                    <h6 style={{color: "white"}}>Full name:</h6> 
+                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.fullname} </h6>
+                    <h6 style={{color: "white"}}>Phone number:</h6>
+                    <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.phoneNumber} </h6>
+                    <hr/>
                     <h4>Personal address</h4>
-                    <h6 >Address</h6>
-                    <h6>Suburb</h6>
-                    <hr></hr>
+                    <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.address} </h6>
+                    <hr/>
                 <CreateEditButton/> 
                 <DeleteAccount/>
              </div> 
