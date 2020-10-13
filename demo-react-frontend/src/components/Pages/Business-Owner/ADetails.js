@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Appointments.css';
 import * as IoIcons from 'react-icons/io';
-import Sidebar from '../../Layout/Sidebar/SidebarBusiness';
+import Sidebar from '../../Layout/Sidebar/Sidebar.js';
 import { Button, Container } from "react-bootstrap";
 import urlAddress from '../../ip.json';
 

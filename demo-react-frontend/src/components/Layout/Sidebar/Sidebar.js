@@ -5,7 +5,6 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as BsIcons from 'react-icons/bs';
 import { IconContext } from 'react-icons';
-import { Link } from 'react-router-dom';
 
 class Sidebar extends Component{
     render() {

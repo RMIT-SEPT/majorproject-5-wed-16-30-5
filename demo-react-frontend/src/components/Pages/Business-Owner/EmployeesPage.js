@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import * as IoIcons from 'react-icons/io';
 import './EmployeesPage.css';
 import CreateAddEmployeeButton from './CreateAddEmployeeButton.js';
-import SidebarBusiness from "../../Layout/Sidebar/SidebarBusiness.js";
+import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
 
 class EmployeesPage extends Component
 {
@@ -15,7 +15,7 @@ class EmployeesPage extends Component
                 employeeName:'Alex',
                 employeeJob:'Manager',
                 businessName:'RMIT connect',
-                employeeDate:'17:50',
+                employeeDate:'8:00 - 18:00',
             },
             {
                 employeeName: 'Selina',

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, Col, Container, Form} from "react-bootstrap";
-import SidebarBusiness from "../../Layout/Sidebar/SidebarBusiness.js";
+import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
 import * as IoIcons from 'react-icons/io';
 import urlAddress from '../../ip.json';
 

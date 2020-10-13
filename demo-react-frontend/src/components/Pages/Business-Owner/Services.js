@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SidebarBusiness from "../../Layout/Sidebar/SidebarBusiness.js";
+import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
 import * as BsIcons from 'react-icons/bs';
 import { Button } from "react-bootstrap";
 import urlAddress from '../../ip.json';

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SidebarBusiness from "../../Layout/Sidebar/SidebarBusiness.js";
+import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
 import Appointments from './Appointments.js';
 import { Container } from "react-bootstrap";
 
