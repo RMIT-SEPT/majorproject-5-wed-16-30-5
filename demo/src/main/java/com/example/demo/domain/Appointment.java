@@ -47,6 +47,10 @@ public class Appointment {
     @JsonIgnore
     private Worker worker;
 
+    private String serviceIdentifier;
+
+    private String workerIdentifier;
+
     private String workerName;
 
     private String serviceName;
@@ -200,5 +204,21 @@ public class Appointment {
 
     public void setWorkerName(String workerName) {
         this.workerName = workerName;
+    }
+
+    public String getServiceIdentifier() {
+        return serviceIdentifier;
+    }
+
+    public void setServiceIdentifier(String serviceIdentifier) {
+        this.serviceIdentifier = serviceIdentifier;
+    }
+
+    public String getWorkerIdentifier() {
+        return workerIdentifier;
+    }
+
+    public void setWorkerIdentifier(String workerIdentifier) {
+        this.workerIdentifier = workerIdentifier;
     }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import DashboardOwner from "./components/Pages/Business-Owner/OwnerDashboard.js";
+import DashboardOwner from "./components/Pages/Business-Owner/Appointments.js";
 import HeaderNew from "./components/Layout/Navbar/Navbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -11,15 +11,16 @@ import SignUp from"./components/Pages/SingUp/SignUp";
 import About from "./components/Pages/About/About";
 import Aboutpage from "./components/Pages/About/aboutpage";
 import serviceDash from "./components/Pages/Services/Service.js";
-import UserAppo from "./components/Pages/User/UserDash.js";
+import UserAppo from "./components/Pages/User/UApt.js";
 import AppoDetails from "./components/Pages/User/AppoDetails.js";
 import CreateAppo from "./components/Pages/User/CreateAppo.js";
 import Profile_Details from "./components/Pages/Profile_Details/Profile_Details";
 import Edit_Profile from "./components/Pages/Profile_Details/Edit_Profile";
-import Services from "./components/Pages/Business-Owner/Services"
+import Services from "./components/Pages/Business-Owner/MyServices"
 import Contact from './components/Pages/Contact/Contact.js';
 import LogOut from './components/Pages/Login/LogOut.js';
 import EmployeesPage from './components/Pages/Business-Owner/EmployeesPage.js';
+import CreateService from './components/Pages/Business-Owner/CreateService.js';
 import AddEmployee from './components/Pages/Business-Owner/AddEmployee.js';
 import EditEmployee from './components/Pages/Business-Owner/EditEmployee.js';
 import ADetails from "./components/Pages/Business-Owner/ADetails.js";
@@ -35,6 +36,7 @@ function App() {
           
           <Route exact path="/dashboardOwner" component={DashboardOwner} />
           <Route exact path="/BusinessServices" component={Services} />
+          <Route exact path="/CreateService" component={CreateService} />
           <Route exact path="/UserAppo" component={UserAppo} />
           <Route exact path="/CreateAppo" component={CreateAppo} />
           <Route exact path="/appointment/:id" component={AppoDetails} />
