@@ -65,35 +65,9 @@ class UApt extends Component {
     changeDateHandler = (event) => {
         this.setState({ appointmentDate: event.target.value });
     }
-    validate = () => {
-        let nameError = '';
-        let desError = '';
-        let dateError = '';
-      
-
-        if (!this.state.appointmentName) {
-            nameError = "*This field is empty";
-        }
-        if (!this.state.description) {
-            desError = "*This field is empty";
-        }
-        if (!this.state.appointmentDate) {
-            dateError = "*This field is empty";
-        }
-        
-
-        if (nameError || desError || dateError) {
-            this.setState({ nameError, desError, dateError });
-            return false
-        }
-        return true
-    }
+    
     handleSubmit = event => {
         event.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
-            console.log(this.state);
-        }
     }
     SaveData(){
         let h = new Headers();

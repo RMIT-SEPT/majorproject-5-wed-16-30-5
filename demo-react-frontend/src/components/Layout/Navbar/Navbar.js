@@ -53,17 +53,12 @@ class Navbar extends Component {
             MenuItems = [
                 {
                     title: 'Home',
-                    url: '/dashboardOwner',
+                    url: '/BusinessServices',
                     cName: 'nav-links',
                 },
                 {
                     title: 'About',
                     url: '/about',
-                    cName: 'nav-links',
-                },
-                {
-                    title: 'Services',
-                    url: '/serviceDash',
                     cName: 'nav-links',
                 },
                 {

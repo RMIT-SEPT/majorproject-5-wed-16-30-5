@@ -1,9 +1,6 @@
 import React, {Component} from "react";
-import {Button, Col, Container, Form} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import './EmployeesPage.css';
-
-
-
 
 class CreateAddEmployeeButton extends Component
 {
@@ -14,10 +11,11 @@ class CreateAddEmployeeButton extends Component
                     <Button
                         id="btnEmpAdd" type="Button" value="Add"
                         style={{ 
-                           position: 'fixed',top: 110,
-                           left: 1100, 
+                           position: 'fixed',
+                           top: '15%',
+                           right: '5%'
                         }}  
-                        className="btn btn-success"
+                        className="btnSend"
                         href="/EmployeeList/AddEmployee">
                        Add Employee
                     </Button>

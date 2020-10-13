@@ -1,7 +1,5 @@
 import React,{ Component } from 'react';
 import './Sidebar.css';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as BsIcons from 'react-icons/bs';
 import { IconContext } from 'react-icons';
@@ -17,8 +15,8 @@ class Sidebar extends Component{
                 cName: 'nav-text'
             },
             {
-                title: 'Create',
-                path: '/CreateAppo',
+                title: 'Book Appointment',
+                path: '/serviceDash',
                 icon: <BsIcons.BsPlusCircle />,
                 cName: 'nav-text'
             },

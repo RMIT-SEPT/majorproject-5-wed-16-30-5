@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
+import Sidebar from "../../Layout/Sidebar/Sidebar.js";
 import * as BsIcons from 'react-icons/bs';
 import { Button } from "react-bootstrap";
 import urlAddress from '../../ip.json';
 
-const url = 'http://' + urlAddress.ip + ':8080/api/appointment/';
+const url = 'http://' + urlAddress.ip + ':8080/api/service/';
 console.log(urlAddress.ip)
 
 class MyServices extends Component {
@@ -13,16 +13,22 @@ class MyServices extends Component {
         super(props)
 
         this.state = {
-            appointments: [],
+            services: [],
         }
-        this.editAppointment = this.editAppointment.bind(this);
+        this.editService = this.editService.bind(this);
     }
-    editAppointment(id) {
-        this.props.history.push(`/appointment/${id}`);
+    editService(id) {
+        this.props.history.push(`/services/${id}`);
     }
     fetchData() {
-
-        let encoded = window.btoa("email@email.com:password");
+        let email = window.sessionStorage.getItem('email');
+        //encrypted password
+        const Cryptr = require('cryptr');
+        const cryptr = new Cryptr('keyword');
+        let encryptedString = window.sessionStorage.getItem('encrypted');
+        const decryptedString = cryptr.decrypt(encryptedString);
+        console.log(decryptedString);
+        let encoded = window.btoa(email + ':' + decryptedString);
         let auth = 'Basic ' + encoded;
         let h = new Headers();
         h.append('Accept', 'application/json');
@@ -37,13 +43,19 @@ class MyServices extends Component {
         })
             .then(res => res.json())
             .then(json => {
-                this.setState({ appointments: json });
+                this.setState({ services: json });
 
             })
     }
     delete(id) {
         let h = new Headers();
-        let encoded = window.btoa("email@email.com:password");
+        let email = window.sessionStorage.getItem('email');
+        const Cryptr = require('cryptr');
+        const cryptr = new Cryptr('keyword');
+        let encryptedString = window.sessionStorage.getItem('encrypted');
+        const decryptedString = cryptr.decrypt(encryptedString);
+        console.log(decryptedString);
+        let encoded = window.btoa(email + ':' + decryptedString);
         let auth = 'Basic ' + encoded;
 
         h.append('Accept', 'application/json');
@@ -68,41 +80,43 @@ class MyServices extends Component {
     render() {
         return (
             <>
-            <SidebarBusiness/>
-            <div style={{ width: '700px', marginLeft: '25%' }} >
-                
-                <h1><BsIcons.BsCardChecklist /> Services</h1>
-                <table >
-                    <thead>
-                        <tr>
-                            <td> Name</td>
-                            <td> Description</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.appointments.map(a =>
-                            <tr
-                                className='appo'
-                                key={a.appointmentIdentifier} >
-
-                                <td> {a.appointmentName}</td>
-                                <td> {a.appointmentDate}</td>
-                                <td className='edt'>
-                                    <Button
-                                        href={`/businessAppo/${a.appointmentIdentifier}`}
-                                        onClick={() => this.editAppointment(a.appointmentIdentifier)}
-                                        style={{ marginRight: '10px' }}>Edit</Button>
-                                    <Button variant="danger" onClick={this.delete.bind(this, a.appointmentIdentifier)}>
-                                        Delete
-                                    </Button>
-                                </td>
+                <Sidebar />
+                <div style={{ marginLeft: '25%' }}>
+                    <h1><BsIcons.BsCardChecklist /> My Services</h1>
+                    <table style={{ width: '700px' }} >
+                        <thead>
+                            <tr>
+                                <td> ID</td>
+                                <td> Name</td>
+                                <td> Description</td>
+                                <td></td>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {this.state.services.map(s =>
+                                <tr
 
-            </div>
+                                    className='appo'
+                                    key={s.serviceIdentifier} >
+
+                                    <td> {s.serviceIdentifier}</td>
+                                    <td> {s.serviceName}</td>
+                                    <td> {s.serviceDescription}</td>
+                                    <td className='edt'>
+                                        <Button
+                                            href={`/services/${s.serviceIdentifier}`}
+                                            onClick={() => this.editService(s.serviceIdentifier)}
+                                            style={{ marginRight: '10px' }}>Edit</Button>
+                                        <Button variant="danger" onClick={this.delete.bind(this, s.serviceIdentifier)}>
+                                            Delete
+                                    </Button>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+
+                </div>
             </>
         )
     }

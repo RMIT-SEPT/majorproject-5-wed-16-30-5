@@ -55,3 +55,20 @@ thead {
 .wtd{
     padding: 10%;
 }
+.btnSend{
+  width: 150px;
+  height: 40px;
+  margin-left: auto;
+  background-color: #3494db;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid #3494db;
+  transition: .3s linear;
+}
+
+.btnSend:hover{
+  background-color: transparent;
+  color: #3494db;
+}

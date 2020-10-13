@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import {Button, Col, Container, Form} from "react-bootstrap";
-import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
+import Sidebar from "../../Layout/Sidebar/Sidebar.js";
 import * as IoIcons from 'react-icons/io';
 import urlAddress from '../../ip.json';
 
-const url = 'http://'+urlAddress.ip+':8080/api/appointment/';
+const url = 'http://'+urlAddress.ip+':8080/api/worker';
 
 
 class AddEmployee extends Component
@@ -13,31 +13,27 @@ class AddEmployee extends Component
         super(props)
 
         this.state = {
-
-            name: '',
-            job:'',
-            workingHours:'',
-            businessName:'',
-            employeeIdentifier: Math.floor(10000 + Math.random() * 90000),
-
+            workerIdentifier: "w" + Math.floor(10000 + Math.random() * 9000),
+            workerName: '',
+            workerAge: '',
+            serviceIdentifier:''
         }
-        this.employeeDetailHandler = this.employeeDetailHandler.bind(this);
-        this.SaveData = this.SaveData.bind(this);
-
+        this.changeNameHandler = this.changeNameHandler.bind(this);
+        this.changeAgeHandler = this.changeAgeHandler.bind(this);
+        this.changeIdHandler = this.changeIdHandler.bind(this);
     }
-
+    changeNameHandler = (event) => {
+        this.setState({ workerName: event.target.value });
+    }
+    changeAgeHandler = (event) => {
+        this.setState({ workerAge: event.target.value });
+    }
+    changeIdHandler = (event) => {
+        this.setState({ serviceIdentifier: event.target.value });
+    }
     handleSubmit = event => {
         event.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
-            console.log(this.state);
-        }
     }
-
-    employeeDetailHandler(event){
-        this.setState({[event.target.name]: event.target.value});
-    }
-
     SaveData() {
         let h = new Headers();
         let email = window.sessionStorage.getItem('email');
@@ -56,61 +52,55 @@ class AddEmployee extends Component
             method: 'post',
             headers: h,
             body: JSON.stringify({
-                job: this.state.job,
-                name: this.state.name,
-                businessName: this.state.businessName,
-                workingHours: this.state.workingHours,
-                employeeIdentifier: this.employeeIdentifier
+                workerIdentifier: this.state.workerIdentifier,
+                workerName: this.state.workerName,
+                workerAge: this.state.workerAge,
+                serviceIdentifier: this.state.serviceIdentifier
             })
         }).then(console.log(this.state))
     }
     componentDidMount() {
-        console.log(this.state.employeeIdentifier);
+        console.log(this.state.workerIdentifier);
     }
 
-        render(){
-               return (
+    render() {
+
+        return (
             <>
-             <SidebarBusiness/>
-              <div style={{ marginLeft: '25%' }}>
-              <h1><IoIcons.IoMdPeople /> Add Employee</h1>
-                    <div >
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label> Employee name: </label>
-                                <input type="text" placeholder="Name" name="name" className="form-control"
-                                    value={this.state.name} onChange={this.employeeDetailHandler}
-                                />
-                                <label>Business Name: </label>
-                                <input type="text" placeholder="BusinessName" name="businessName" className="form-control"
-                                    value={this.state.businessName} onChange={this.employeeDetailHandler}
-                                />
-                                <label>Job: </label>
-                                <input type="text" placeholder="JobName" name="job" className="form-control"
-                                    value={this.state.job} onChange={this.employeeDetailHandler}
-                                />
-                                <label>Working Hours: </label>
-                                <input type="time"  name="workingHours" className="form-control"
-                                    value={this.state.workingHours} onChange={this.employeeDetailHandler}
-                                />
-                                
-                            </div>
-                            <Button
-                                className="btn btn-success"
-                                onClick={this.SaveData.bind(this)}
-                                href='/EmployeesPage'                 
-                                >
-                                Save
-                            </Button>
-                        </form>
-                   </div>
+                <Sidebar />
+                <div style={{ marginLeft: '25%' }}>
+                    <h1><IoIcons.IoIosPaper /> Create a new Employee: </h1>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label> Employee Id: </label>
+                            <input type="text" placeholder="workerIdentifier" name="workerIdentifier" className="form-control"
+                                value={this.state.workerIdentifier} />
+                        </div>
+                        <div className="form-group">
+                            <label> Name: </label>
+                            <input type="text" placeholder="Name" name="workerName" className="form-control"
+                                value={this.state.workerName} onChange={this.changeNameHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Age: </label>
+                            <input placeholder="Age" name="workerAge" className="form-control"
+                                value={this.state.workerAge} onChange={this.changeAgeHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Service Id: </label>
+                            <input placeholder="Service Id" name="workerAge" className="form-control"
+                                value={this.state.serviceIdentifier} onChange={this.changeIdHandler} />
+                        </div>
+                        <Button
+                            className="btn btn-success"
+                            onClick={this.SaveData.bind(this)}
+                            href='/EmployeesPage'
+                        >Save</Button>
+                    </form>
                 </div>
             </>
-       
-                 
-               );
-               
-           }
+        )
+    }
 }
 
          

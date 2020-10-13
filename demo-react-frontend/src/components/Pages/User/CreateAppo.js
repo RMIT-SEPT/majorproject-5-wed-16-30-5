@@ -13,12 +13,17 @@ class CreateAppo extends Component {
 
         this.state = {
             appointmentIdentifier: Math.floor(10000 + Math.random() * 90000),
+            serviceIdentifier: this.props.match.params.id,
+            workerIdentifier:'',
             appointmentName: '',
             description: '',
-            appointmentDate: ''
+            appointmentDate: '',
+            appointmentTime:''
         }
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeDesHandler = this.changeDesHandler.bind(this);
+        this.changeTimeHandler = this.changeTimeHandler.bind(this);
+        this.changeWorkerHandler = this.changeWorkerHandler.bind(this);
         this.changeDateHandler = this.changeDateHandler.bind(this);
     }
     changeNameHandler = (event) => {
@@ -30,12 +35,14 @@ class CreateAppo extends Component {
     changeDateHandler = (event) => {
         this.setState({ appointmentDate: event.target.value });
     }
+    changeTimeHandler = (event) => {
+        this.setState({ appointmentTime: event.target.value });
+    }
+    changeWorkerHandler = (event) => {
+        this.setState({ workerIdentifier: event.target.value });
+    }
     handleSubmit = event => {
         event.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
-            console.log(this.state);
-        }
     }
     SaveData() {
         let h = new Headers();
@@ -58,12 +65,15 @@ class CreateAppo extends Component {
                 appointmentIdentifier: this.state.appointmentIdentifier,
                 appointmentDate: this.state.appointmentDate,
                 appointmentName: this.state.appointmentName,
-                description: this.state.description
+                description: this.state.description,
+                appointmentTime: this.state.appointmentTime,
+                workerIdentifier: this.state.workerIdentifier
             })
         }).then(console.log(this.state))
     }
     componentDidMount() {
         console.log(this.state.appointmentIdentifier);
+        console.log(this.state.serviceIdentifier)
     }
 
     render() {
@@ -71,15 +81,20 @@ class CreateAppo extends Component {
         return (
             <>
                 <Sidebar />
-                <div style={{ marginLeft: '25%' }}>
-                    <h1><IoIcons.IoIosPaper /> Book an Appointment: </h1>
+                <h1 style={{ marginLeft: '25%' }}><IoIcons.IoIosPaper /> Book an Appointment: </h1>
+                <div className="container">
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
+                        <div className="form-group" style={{float:'left', marginRight:'10px'}}>
                             <label> Appointment Id: </label>
                             <input type="text" placeholder="appointmentIdentifier" name="appointmentIdentifier" className="form-control"
                                 value={this.state.appointmentIdentifier}/>
                         </div>
                         <div className="form-group">
+                            <label> Service Id: </label>
+                            <input type="text" placeholder="serviceIdentifier" name="serviceIdentifier" className="form-control"
+                                value={this.state.serviceIdentifier} />
+                        </div>
+                        <div className="form-group" style={{ float: 'left', marginRight: '10px' }}>
                             <label> Name: </label>
                             <input type="text" placeholder="Name" name="appointmentName" className="form-control"
                                 value={this.state.appointmentName} onChange={this.changeNameHandler} />
@@ -89,10 +104,20 @@ class CreateAppo extends Component {
                             <input placeholder="Description" name="Description" className="form-control"
                                 value={this.state.description} onChange={this.changeDesHandler} />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group" style={{ float: 'left', marginRight: '10px' }}>
                             <label> Date: </label>
                             <input type='date' placeholder="Date" name="Date" className="form-control"
                                 value={this.state.appointmentDate} onChange={this.changeDateHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Time: </label>
+                            <input type='time' placeholder="Date" name="Date" className="form-control"
+                                value={this.state.appointmentTime} onChange={this.changeTimeHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Employee: </label>
+                            <input type='text' placeholder="Date" name="Date" className="form-control"
+                                value={this.state.workerIdentifier} onChange={this.changeWorkerHandler} />
                         </div>
                         <Button
                             className="btn btn-success"

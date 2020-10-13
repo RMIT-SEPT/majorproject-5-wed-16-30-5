@@ -70,7 +70,14 @@ class Login extends Component {
               console.log("data: "+data.token);
               window.sessionStorage.setItem("token", data.token);
               window.sessionStorage.setItem("business", true);
-              this.props.history.push("/dashboardOwner");
+              window.sessionStorage.setItem("email", this.state.username);
+
+              const Cryptr = require("cryptr");
+              const cryptr = new Cryptr("keyword");
+
+              const encryptedString = cryptr.encrypt(this.state.password);
+              window.sessionStorage.setItem("encrypted", encryptedString);
+              this.props.history.push("/BusinessServices");
               window.location.reload(true);
             });
           } else {
