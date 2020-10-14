@@ -63,6 +63,8 @@ public class ServiceService {
         return serviceRepo.findByServiceIdentifier(serviceId.toUpperCase());
     }
 
+    public Iterable<Service> findAll() {return serviceRepo.findAll(); }
+
     public Iterable<Service> findAllService(String username) {
         return serviceRepo.findAllByOwnerName(username);
     }
