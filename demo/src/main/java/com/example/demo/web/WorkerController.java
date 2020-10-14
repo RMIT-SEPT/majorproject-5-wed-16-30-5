@@ -36,6 +36,11 @@ public class WorkerController {
         return workerService.findAllWorker(principal.getName());
     }
 
+    @GetMapping("/allWorkers")
+    public Iterable<Worker> getAllWorkers() {
+        return workerService.findAll();
+    }
+
     @DeleteMapping("/{workerId}")
     public ResponseEntity<?> deleteWorker(@PathVariable String workerId, Principal principal) {
         workerService.deleteWorkerByIdentifier(workerId, principal.getName());

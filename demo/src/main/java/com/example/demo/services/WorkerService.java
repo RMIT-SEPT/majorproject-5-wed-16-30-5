@@ -77,6 +77,9 @@ public class WorkerService {
     public Iterable<Worker> findAllWorker(String username) {
         return workerRepo.findAllByOwnerName(username);
     }
+    public Iterable<Worker> findAll() {
+        return workerRepo.findAll();
+    }
 
     public void deleteWorkerByIdentifier(String workerId, String username) {
         Worker w = workerRepo.findByWorkerIdentifier(workerId);
