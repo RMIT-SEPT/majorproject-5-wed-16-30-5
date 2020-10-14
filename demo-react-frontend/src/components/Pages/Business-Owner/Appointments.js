@@ -76,8 +76,8 @@ class Appointments extends Component {
                                             <td>{a.workerName}</td>
                                             <td> {a.appointmentOwner}</td>
                                             <td> {a.appointmentName}</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{a.appointmentDate}</td>
+                                            <td>{a.appointmentTime}</td>
                                         </tr>
                                     )}
                                 </tbody>

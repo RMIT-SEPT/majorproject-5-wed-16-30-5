@@ -37,6 +37,11 @@ public class ServiceController {
         return serviceService.findAllService(principal.getName());
     }
 
+    @GetMapping("/allServices")
+    public Iterable<Service> getAllServices(){
+        return serviceService.findAll();
+    }
+
     @DeleteMapping("/{serviceId}")
     public ResponseEntity<?> deleteService(@PathVariable String serviceId, Principal principal) {
         serviceService.deleteServiceByIdentifier(serviceId, principal.getName());

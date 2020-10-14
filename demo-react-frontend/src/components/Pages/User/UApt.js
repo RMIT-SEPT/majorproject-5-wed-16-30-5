@@ -88,6 +88,9 @@ class UApt extends Component {
                         <tr>
                             <td> Appointment</td>
                             <td> Date</td>
+                            <td> Time</td>
+                            <td> With</td>
+                            <td> Service</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -100,6 +103,9 @@ class UApt extends Component {
                                 
                                 <td> {a.appointmentName}</td>
                                 <td> {a.appointmentDate}</td>
+                                <td> {a.appointmentTime}</td>
+                                <td> {a.workerName}</td>
+                                <td> {a.serviceName}</td>
                                 <td className='edt'>
                                     <Button
                                         href={`/appointment/${a.appointmentIdentifier}`}

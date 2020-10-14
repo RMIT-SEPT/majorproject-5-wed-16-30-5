@@ -30,16 +30,13 @@ class Service extends React.Component {
     }
     fetchData() {
         
-        let encoded = window.btoa("owner@email.com:password");
-        let auth = 'Basic ' + encoded;
         let h = new Headers();
         h.append('Accept', 'application/json');
-        h.append('Authorization', auth);
         h.append("Access-Control-Allow-Origin", "*")
 
 
 
-        fetch(url + 'all', {
+        fetch(url + 'allServices', {
             method: 'GET',
             headers: h
         })

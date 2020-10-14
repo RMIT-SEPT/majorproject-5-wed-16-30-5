@@ -11,12 +11,13 @@
 }
 .register h1{
     text-align: center;
-    margin-top: -45px;
+    margin-top: -20px;
     color: #201e3b;
 }
 .form-group-register{
   border-bottom: 2px solid #272253;
   position: relative;
+  margin-bottom: 7px;
 }
 .form-group-acc{
     margin-top: 20px;

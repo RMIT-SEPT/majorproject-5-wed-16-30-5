@@ -1,8 +1,10 @@
 import React, {Component} from "react";
-import {Button, Col, Container, Form} from "react-bootstrap";
-import SidebarBusiness from "../../Layout/Sidebar/Sidebar.js";
+import {Button, Container} from "react-bootstrap";
+import Sidebar from "../../Layout/Sidebar/Sidebar.js";
 import * as IoIcons from 'react-icons/io';
+import urlAddress from '../../ip.json';
 
+const url = 'http://' + urlAddress.ip + ':8080/api/worker';
 
 class EditEmployee extends Component
 {
@@ -10,22 +12,17 @@ class EditEmployee extends Component
         super(props)
 
         this.state = {
-    
-            id:'',
-            name: '',
-            job:'',
-            workingHours:'',
-            businessName:'',
-            employeeIdentifier: this.props.match.params.id,
-
+            workerIdentifier: this.props.match.params.id,
+            id: '',
+            workerName: '',
+            workerAge: '',
+            serviceIdentifier:''
         }
-        this.employeeDetailHandler = this.employeeDetailHandler.bind(this);
         this.SaveData = this.SaveData.bind(this);
-
-
+        this.changeNameHandler = this.changeNameHandler.bind(this);
+        this.changeAgeHandler = this.changeAgeHandler.bind(this);
     }
 
-   
     fetchData() {
 
         let h = new Headers();
@@ -41,39 +38,31 @@ class EditEmployee extends Component
         h.append('Accept', 'application/json');
         h.append('Authorization', auth);
 
-        fetch('/' + this.state.employeeIdentifier, {
+        fetch(url + '/' + this.state.workerIdentifier, {
             method: 'GET',
             headers: h
         })
             .then(res => res.json())
             .then(json => {
-                this.setState({ 
+                this.setState({
                     id: json.id,
-                    job: json.job,
-                    name: json.name,
-                    workingHours: json.workingHours,
-                    employeeIdentifier: json.employeeIdentifier,
-                    businessName: json.businessName
-                   
-                 });
+                    workerIdentifier: json.workerIdentifier,
+                    workerName: json.workerName,
+                    workerAge: json.workerAge,
+                    serviceIdentifier: json.serviceIdentifier
+                });
 
             });
     }
-
+    changeNameHandler = (event) => {
+        this.setState({ workerName: event.target.value });
+    }
+    changeAgeHandler = (event) => {
+        this.setState({ workerAge: event.target.value });
+    }
     handleSubmit = event => {
         event.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
-            console.log(this.state);
-        }
     }
-
-    employeeDetailHandler(event){
-   
-        this.setState({[event.target.name]: event.target.value});
-    }
-     
-
     SaveData() {
         let h = new Headers();
         let email = window.sessionStorage.getItem('email');
@@ -88,68 +77,51 @@ class EditEmployee extends Component
         h.append('Accept', 'application/json');
         h.append('Authorization', auth);
 
-        fetch('', {
+        fetch(url + '/', {
             method: 'post',
             headers: h,
             body: JSON.stringify({
                 id: this.state.id,
-                job: this.state.job,
-                name: this.state.name,
-                businessName: this.state.businessName,
-                workingHours: this.state.workingHours,
-                employeeIdentifier: this.state.employeeIdentifier,
-                title: this.state.title
+                workerIdentifier: this.state.workerIdentifier,
+                workerName: this.state.workerName,
+                workerAge: this.state.workerAge,
+                serviceIdentifier: this.state.serviceIdentifier
             })
         }).then(json => this.fetchData()).then(console.log(this.state))
     }
-
     componentDidMount() {
         this.fetchData();
     }
 
-        render(){
-               return (
-            <>
-             <SidebarBusiness/>
-              <div style={{ marginLeft: '25%' }}>
-              <h1><IoIcons.IoMdPeople /> Edit Employee</h1>
-                    <div >
-                        <form>
-                            <div className="form-group">
-                                <label> Employee name: </label>
-                                <input type="text" placeholder="Name" name="name" className="form-control"
-                                    value={this.state.name} onChange={this.employeeDetailHandler}
-                                />
-                                <label>Business Name: </label>
-                                <input type="text" placeholder="BusinessName" name="businessName" className="form-control"
-                                    value={this.state.businessName} onChange={this.employeeDetailHandler}
-                                />
-                                <label>Job: </label>
-                                <input type="text" placeholder="JobName" name="job" className="form-control"
-                                    value={this.state.job} onChange={this.employeeDetailHandler}
-                                />
-                                <label>Working Hours: </label>
-                                <input type="time"  name="workingHours" className="form-control"
-                                    value={this.state.workingHours} onChange={this.employeeDetailHandler}
-                                />
-                                
-                            </div>
-                            <Button
-                                className="btn btn-success"
-                                onClick={this.SaveData.bind(this)}
-                                href='/EmployeesPage'                 
-                                >
-                                Save
-                            </Button>
-                        </form>
-                   </div>
+    render() {
+
+        return (
+            <Container fluid style={{ padding: '0rem' }}>
+                <Sidebar />
+                <div style={{ marginLeft: '25%' }}>
+                    <h1><IoIcons.IoMdPeople /> Worker Id: {this.state.workerIdentifier}</h1>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label> Name: </label>
+                            <input type="text" placeholder="Name" name="workerName" className="form-control"
+                                value={this.state.workerName} onChange={this.changeNameHandler} />
+                        </div>
+                        <div className="form-group">
+                            <label> Age: </label>
+                            <input placeholder="Age" name="Description" className="form-control"
+                                value={this.state.workerAge}
+                                onChange={this.changeAgeHandler} />
+                        </div>
+                        <Button
+                            className="btn btn-success"
+                            onClick={this.SaveData.bind(this, this.state.id)}
+                            href="/EmployeesPage">Save</Button>
+                    </form>
+
                 </div>
-            </>
-       
-                 
-               );
-               
-           }
+            </Container>
+        )
+    }
 }
         
       export default EditEmployee;

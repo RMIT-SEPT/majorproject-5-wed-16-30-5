@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Appointments.css';
 import { Button } from "react-bootstrap";
-import * as IoIcons from 'react-icons/io';
+import * as BsIcons from 'react-icons/bs';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import urlAddress from '../../ip.json';
 
@@ -63,7 +63,7 @@ class CreateService extends Component {
             <>
                 <Sidebar />
                 <div style={{ marginLeft: '25%' }}>
-                    <h1><IoIcons.IoIosPaper /> Create a new Service: </h1>
+                    <h1><BsIcons.BsCardChecklist /> Create a new Service: </h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label> Service Id: </label>

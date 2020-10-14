@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Appointments.css';
 import { Button, Container } from "react-bootstrap";
-import * as IoIcons from 'react-icons/io';
+import * as BsIcons from 'react-icons/bs';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import urlAddress from '../../ip.json';
 
@@ -96,7 +96,7 @@ class EditService extends Component {
             <Container fluid style={{ padding: '0rem' }}>
                 <Sidebar />
                 <div style={{ marginLeft: '25%' }}>
-                    <h1><IoIcons.IoIosPaper /> Service Id: {this.state.serviceIdentifier}</h1>
+                    <h1><BsIcons.BsCardChecklist /> Service Id: {this.state.serviceIdentifier}</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label> Name: </label>

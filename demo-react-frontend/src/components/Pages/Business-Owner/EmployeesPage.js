@@ -19,7 +19,7 @@ class EmployeesPage extends Component
         this.editEmployee = this.editEmployee.bind(this);
     }
     editEmployee(id) {
-        this.props.history.push(`/EmployeeList/EditEmployee/${id}`);
+        this.props.history.push(`/EmployeeList/${id}`);
     }
     fetchData() {
         let email = window.sessionStorage.getItem('email');
@@ -76,6 +76,7 @@ class EmployeesPage extends Component
 
     componentDidMount() {
         this.fetchData();
+        console.log(this.state.employees);
     }
 
     render() {
@@ -108,7 +109,7 @@ class EmployeesPage extends Component
                                     <td>{s.serviceName}</td>
                                     <td className='edt'>
                                         <Button
-                                            href={`/services/${s.workerIdentifier}`}
+                                            href={`/EmployeeList/${s.workerIdentifier}`}
                                             onClick={() => this.editEmployee(s.workerIdentifier)}
                                             style={{ marginRight: '10px' }}>Edit</Button>
                                         <Button variant="danger" onClick={this.delete.bind(this, s.workerIdentifier)}>

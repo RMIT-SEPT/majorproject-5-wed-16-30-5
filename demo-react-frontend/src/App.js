@@ -55,8 +55,8 @@ function App() {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/LogOut" component={LogOut} />
           <Route exact path="/EmployeesPage" component={EmployeesPage} />
-          <Route exact path="/EmployeeList/AddEmployee" component={AddEmployee} />
-          <Route exact path="/EmployeeList/EditEmployee/:id" component={EditEmployee} />
+          <Route exact path="/AddEmployee" component={AddEmployee} />
+          <Route exact path="/EmployeeList/:id" component={EditEmployee} />
 
 
 

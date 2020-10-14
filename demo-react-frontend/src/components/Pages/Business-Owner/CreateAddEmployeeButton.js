@@ -16,7 +16,7 @@ class CreateAddEmployeeButton extends Component
                            right: '5%'
                         }}  
                         className="btnSend"
-                        href="/EmployeeList/AddEmployee">
+                        href="/AddEmployee">
                        Add Employee
                     </Button>
                  </>

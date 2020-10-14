@@ -77,6 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .antMatchers(SIGN_UP_URLS).permitAll()
                 .antMatchers(OWNER_SIGN_UP_URLS).permitAll()
+                .antMatchers(GET_ALL_SERVICES_URL).permitAll()
+                .antMatchers(GET_ALL_WORKERS_URL).permitAll()
                 .antMatchers(H2_URL).permitAll()
                 .antMatchers(APPOINTMENT_URLS).hasRole("USER")
                 .antMatchers(APPOINTMENT_TASK_LIST_URLS).hasRole("USER")

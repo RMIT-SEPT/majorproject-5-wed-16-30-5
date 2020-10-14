@@ -11,5 +11,7 @@ public class SecurityConstants {
     public static final String TOKEN_PREFIX= "Bearer ";
     public static final String HEADER_STRING = "Authorization";
     public static final long EXPIRATION_TIME = 3000_000; //30 seconds
+    public static final String GET_ALL_SERVICES_URL = "/api/service/allServices";
+    public static final String GET_ALL_WORKERS_URL = "/api/worker/allWorkers";
 
 }

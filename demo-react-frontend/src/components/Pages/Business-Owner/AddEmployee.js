@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import {Button, Col, Container, Form} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Sidebar from "../../Layout/Sidebar/Sidebar.js";
 import * as IoIcons from 'react-icons/io';
 import urlAddress from '../../ip.json';
 
 const url = 'http://'+urlAddress.ip+':8080/api/worker';
-
+const urlService = 'http://' + urlAddress.ip + ':8080/api/service/all';
 
 class AddEmployee extends Component
 {
@@ -13,6 +13,7 @@ class AddEmployee extends Component
         super(props)
 
         this.state = {
+            services:[],
             workerIdentifier: "w" + Math.floor(10000 + Math.random() * 9000),
             workerName: '',
             workerAge: '',
@@ -59,7 +60,31 @@ class AddEmployee extends Component
             })
         }).then(console.log(this.state))
     }
+    fetchServices(){
+        let h = new Headers();
+        let email = window.sessionStorage.getItem('email');
+        const Cryptr = require('cryptr');
+        const cryptr = new Cryptr('keyword');
+        let encryptedString = window.sessionStorage.getItem('encrypted');
+        const decryptedString = cryptr.decrypt(encryptedString);
+        console.log(decryptedString);
+        let encoded = window.btoa(email + ':' + decryptedString);
+        let auth = 'Basic ' + encoded;
+        h.append('Content-Type', 'application/json');
+        h.append('Accept', 'application/json');
+        h.append('Authorization', auth);
+
+        fetch(urlService, {
+            method: 'GET',
+            headers: h
+        })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({ services: json });
+            })
+    }
     componentDidMount() {
+        this.fetchServices();
         console.log(this.state.workerIdentifier);
     }
 
@@ -87,15 +112,19 @@ class AddEmployee extends Component
                                 value={this.state.workerAge} onChange={this.changeAgeHandler} />
                         </div>
                         <div className="form-group">
-                            <label> Service Id: </label>
-                            <input placeholder="Service Id" name="workerAge" className="form-control"
-                                value={this.state.serviceIdentifier} onChange={this.changeIdHandler} />
+                            <label style={{ marginRight: '10px' }}> Service Id: </label>
+                            <select id="service id" name="service" className="service" onChange={this.changeIdHandler}>
+                                <option>Select the Service</option>
+                                {this.state.services.map(e =>
+                                    <option value={e.serviceIdentifier} >{e.serviceName}</option>
+                                )}
+                            </select>
                         </div>
                         <Button
                             className="btn btn-success"
                             onClick={this.SaveData.bind(this)}
                             href='/EmployeesPage'
-                        >Save</Button>
+                        >Add</Button>
                     </form>
                 </div>
             </>

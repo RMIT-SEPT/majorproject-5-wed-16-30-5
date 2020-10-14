@@ -4,8 +4,10 @@ import { Button } from "react-bootstrap";
 import * as IoIcons from 'react-icons/io';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import urlAddress from '../../ip.json';
+import TimeField from 'react-simple-timefield';
 
-const url = 'http://'+urlAddress.ip+':8080/api/appointment/';
+const url = 'http://'+urlAddress.ip+':8080/api/appointment';
+const urlWorker = 'http://' + urlAddress.ip + ':8080/api/worker/allWorkers';
 
 class CreateAppo extends Component {
     constructor(props) {
@@ -14,7 +16,9 @@ class CreateAppo extends Component {
         this.state = {
             appointmentIdentifier: Math.floor(10000 + Math.random() * 90000),
             serviceIdentifier: this.props.match.params.id,
-            workerIdentifier:'',
+            worker: [],
+            employee: [],
+            workerIdentifier: '',
             appointmentName: '',
             description: '',
             appointmentDate: '',
@@ -26,6 +30,7 @@ class CreateAppo extends Component {
         this.changeWorkerHandler = this.changeWorkerHandler.bind(this);
         this.changeDateHandler = this.changeDateHandler.bind(this);
     }
+
     changeNameHandler = (event) => {
         this.setState({ appointmentName: event.target.value });
     }
@@ -63,6 +68,7 @@ class CreateAppo extends Component {
             headers: h,
             body: JSON.stringify({
                 appointmentIdentifier: this.state.appointmentIdentifier,
+                serviceIdentifier: this.state.serviceIdentifier,
                 appointmentDate: this.state.appointmentDate,
                 appointmentName: this.state.appointmentName,
                 description: this.state.description,
@@ -71,31 +77,46 @@ class CreateAppo extends Component {
             })
         }).then(console.log(this.state))
     }
+    fetchWorker(){
+        let h = new Headers();
+        h.append('Accept', 'application/json');
+        h.append("Access-Control-Allow-Origin", "*")
+
+        fetch(urlWorker, {
+            method: 'GET',
+            headers: h
+        })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({ worker: json });
+            })
+    }
     componentDidMount() {
+        this.fetchWorker();
         console.log(this.state.appointmentIdentifier);
-        console.log(this.state.serviceIdentifier)
+        console.log(this.state.serviceIdentifier);
     }
 
     render() {
-
+        const employee = this.state.worker.filter(
+            w => {
+                return w.serviceIdentifier.startsWith(this.state.serviceIdentifier);
+            }
+        );
         return (
             <>
                 <Sidebar />
                 <h1 style={{ marginLeft: '25%' }}><IoIcons.IoIosPaper /> Book an Appointment: </h1>
-                <div className="container">
+                <div className="container" style={{ marginLeft: '25%' }}>
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group" style={{float:'left', marginRight:'10px'}}>
-                            <label> Appointment Id: </label>
-                            <input type="text" placeholder="appointmentIdentifier" name="appointmentIdentifier" className="form-control"
-                                value={this.state.appointmentIdentifier}/>
+                        <div className="form-group">
+                            <label> Appointment Id: {this.state.appointmentIdentifier}</label>
                         </div>
                         <div className="form-group">
-                            <label> Service Id: </label>
-                            <input type="text" placeholder="serviceIdentifier" name="serviceIdentifier" className="form-control"
-                                value={this.state.serviceIdentifier} />
+                            <label> Service Id: {this.state.serviceIdentifier}</label>
                         </div>
-                        <div className="form-group" style={{ float: 'left', marginRight: '10px' }}>
-                            <label> Name: </label>
+                        <div className="form-group" >
+                            <label> Your Name: </label>
                             <input type="text" placeholder="Name" name="appointmentName" className="form-control"
                                 value={this.state.appointmentName} onChange={this.changeNameHandler} />
                         </div>
@@ -111,19 +132,35 @@ class CreateAppo extends Component {
                         </div>
                         <div className="form-group">
                             <label> Time: </label>
-                            <input type='time' placeholder="Date" name="Date" className="form-control"
-                                value={this.state.appointmentTime} onChange={this.changeTimeHandler} />
+                            
+                            <TimeField
+                                value="00:00:00"
+                                onChange={this.changeTimeHandler}
+                                input={
+                                <input 
+                                type='text' 
+                                placeholder="Date" 
+                                name="Date" 
+                                className="form-control"
+                                value={this.state.appointmentTime}/>
+                                }
+                                showSeconds
+                            />
                         </div>
                         <div className="form-group">
-                            <label> Employee: </label>
-                            <input type='text' placeholder="Date" name="Date" className="form-control"
-                                value={this.state.workerIdentifier} onChange={this.changeWorkerHandler} />
+                            <label style={{marginRight:'10px'}}> Employee: </label>    
+                            <select id="employee id" name="employee" className="employee" onChange={this.changeWorkerHandler}>
+                                <option>Choose an Employee</option>
+                                {employee.map(e =>
+                                    <option value={e.workerIdentifier} >{e.workerName}</option>
+                                )}
+                            </select>
                         </div>
                         <Button
                             className="btn btn-success"
                             onClick={this.SaveData.bind(this)}
                             href='/UserAppo'
-                            >Save</Button>
+                            >Book Appointment</Button>
                     </form>
                 </div>
             </>

@@ -114,37 +114,31 @@ class SignUp extends Component {
                 <form  id="regForm" action=''>
 
                     <div className="form-group-register">
-                        <br/>
                         <input id="txtEmail" type="email" placeholder="Enter Email" 
                             name="email" value={this.state.email} onChange={this.onChange}></input>
                     </div>
 
                     <div className="form-group-register">
-                        <br/>
                         <input id="txtName" type="text" placeholder="Enter Password" 
                             name="password" value={this.state.password} onChange={this.onChange}></input>
                     </div>
 
                     <div className="form-group-register">
-                        <br/>
                         <input type="text" placeholder="Re-enter Password" 
                             name="confirmPassword" value={this.state.confirmPassword} onChange={this.onChange}></input>
                     </div>
 
                     <div className="form-group-register">
-                        <br/>
                         <input type="text" placeholder="Full Name" 
                             name="fullname" value={this.state.fullname} onChange={this.onChange}></input>
                     </div>
 
                     <div className="form-group-register">
-                        <br/>
                         <input type="phone" placeholder="Phone Number" 
                             name="phoneNumber" value={this.state.phoneNumber} onChange={this.onChange}></input>
                     </div>
 
                     <div className="form-group-register">
-                        <br/>
                         <input type="text" placeholder="Home Address" 
                             name="address" value={this.state.address} onChange={this.onChange}></input>
                     </div>
@@ -164,7 +158,6 @@ class SignUp extends Component {
                         : this.state.type === "business" ?
                             <div className="form-group-business">
                                 
-                                <br/>
                                 <input type="text" name="companyName" placeholder="Enter Business Name"
                                     value={this.state.companyName} onChange={this.onChange}></input>
                                 </div>
