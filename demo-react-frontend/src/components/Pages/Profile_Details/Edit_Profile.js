@@ -3,8 +3,10 @@ import {Button,  Container} from "react-bootstrap";
 import Sidebar from '../../Layout/Sidebar/Sidebar.js';
 import './Profile_Details.css';
 import urlAddress from "../../ip.json";
+import jwt_decode from "jwt-decode";
+import * as BsIcons from 'react-icons/bs';
 
-const url = 'http://'+urlAddress.ip+':8080/api/';
+const url = 'http://'+urlAddress.ip+':8080/api/users/';
 console.log(urlAddress.ip);
 
 
@@ -15,9 +17,9 @@ class Edit_Profile extends Component
         super(props)
 
         this.state = {
-            id: '1',
-            username: 'cus@come',
-            password:'password',
+            id: '',
+            username: '',
+            password:'',
             fullname: '',
             address:'',
             phoneNumber: '',
@@ -37,6 +39,37 @@ class Edit_Profile extends Component
             console.log(this.state);
         }
     }
+    fetch(){
+        var token = window.sessionStorage.getItem('token');
+        var decoded = jwt_decode(token);
+
+        const Cryptr = require('cryptr');
+        const cryptr = new Cryptr('keyword');
+        let encryptedString = window.sessionStorage.getItem('encrypted');
+        const decryptedString = cryptr.decrypt(encryptedString);
+
+        let h = new Headers();
+        h.append('Accept', 'application/json');
+        h.append("Access-Control-Allow-Origin", "*")
+
+        fetch(url + decoded.id, {
+            method: 'GET',
+            headers: h
+        })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    id: json.id,
+                    username: json.username,
+                    fullname: json.fullname,
+                    password: decryptedString,
+                    confirmPassword: decryptedString,
+                    phoneNumber: json.phoneNumber,
+                    address: json.address
+                });
+
+            })
+    }
     SaveData() {
         let h = new Headers();
 
@@ -44,10 +77,10 @@ class Edit_Profile extends Component
         h.append('Accept', 'application/json');
 
         var msg = window.confirm("Are you sure you want to update the details?");
-        if (msg === true )
+        if (msg)
          {
             alert("Personal Details successfully updated");
-            fetch(url + 'users/register', {
+            fetch(url + 'register', {
                 method: 'post',
                 headers: h,
                 body: JSON.stringify({
@@ -63,7 +96,9 @@ class Edit_Profile extends Component
     }
         console.log(this.state);
     }
-
+    componentDidMount() {
+        this.fetch();
+    }
 
     render() {
 
@@ -71,6 +106,7 @@ class Edit_Profile extends Component
             <Container fluid style={{ padding: '0rem' }}>
                 <Sidebar />
                 <div style={{ marginLeft: '25%' }}>
+                    <h1><BsIcons.BsPersonFill /> Profile: {this.state.id}</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label> Name: </label>
@@ -91,7 +127,7 @@ class Edit_Profile extends Component
                         
                         <Button
                             className="btn btn-success"
-                            onClick={this.SaveData.bind(this, this.state.id)}
+                            onClick={this.SaveData.bind(this)}
                              href="/profile"
                              >
                             Save

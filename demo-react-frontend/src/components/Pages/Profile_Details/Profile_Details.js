@@ -1,90 +1,106 @@
 import React, { Component } from 'react';
-import {Button, Col, Container, Form} from "react-bootstrap";
-import DeleteAccount from './DeleteAccount';
-import CreateEditButton from './CreateEditButton'
+import {Container, Button} from "react-bootstrap";
 import Sidebar from '../../Layout/Sidebar/Sidebar.js';
-import axios from 'axios';
 import urlAddress from "../../ip.json";
 import './Profile_Details.css';
 import jwt_decode from "jwt-decode";
 
 
 
-const url = 'http://'+urlAddress.ip+':8080/api/';
+const url = 'http://'+urlAddress.ip+':8080/api/users/';
 console.log(urlAddress.ip);
 
      class Profile_Details extends Component{
-        constructor(props) {
-            super(props)
+        constructor() {
+            super()
         this.state = {
-            id:this.props.match.params.id,
-            customerDetail: [],
+            id:'',
+            userID:'',
+            username:'',
+            fullname:'',
+            phoneNumber:'',
+            address:'',
             errorMsg:'',
 
         }
-      
-        this.componentDidMount = this.componentDidMount.bind(this);
-
     }
-
-    componentDidMount(){
-        const cu_id = this.props.match.params.id;
-        axios.get(url + `users/1`)
-        // axios.get(url + `users/${cu_id}`)
-            .then(response =>{
-                console.log(response);
-
-                // window.sessionStorage.setItem("token", response.data.token);
-                // window.sessionStorage.setItem("id", encryptedId);
-                // const decodedId =  jwt_decode(token);
-                // console.log(decoded);
-                // window.sessionStorage.setItem("id", decodedId);
-
-                // var decodedHeader = jwt_decode(token, { header: true });
-                // console.log(decodedHeader);
-               
-                this.setState({
-                    id: response.data,
-                    customerDetail: response.data
+    delete() {
+        let h = new Headers();
+        var token = window.sessionStorage.getItem('token');
+        var decoded = jwt_decode(token);
+        h.append('Accept', 'application/json');
+        if (window.confirm('Do you want to delete?')) {
+            fetch(url + decoded.id, {
+                method: 'delete',
+                headers: h
+            })
+                .then(json => this.fetchData())
+                .then(function (response) {
+                    console.log('Authenticated')
                 });
-            })
-            .catch(error =>{
-                console.log(error);
-                this.setState({errorMsg: 'Cannot get the profile details' })
-            })
+        }
+        window.sessionStorage.clear();
+        window.location.reload(true);
+    }
+    componentDidMount(){
+        var token = window.sessionStorage.getItem('token');
+        var decoded = jwt_decode(token);
+        let h = new Headers();
+        h.append('Accept', 'application/json');
+        h.append("Access-Control-Allow-Origin", "*")
 
+        fetch(url + decoded.id, {
+            method: 'GET',
+            headers: h
+        })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    username: json.username,
+                    fullname: json.fullname,
+                    phoneNumber: json.phoneNumber,
+                    address: json.address
+                });
+
+            })
     }
 
   
     render () {
-        const { customerDetail, errorMsg} = this.state
-
         return (      
            <Container fluid style={{paddingLeft:'0rem', paddingRight:'0rem'}}>
             <Sidebar/>
-            <div className="body">
+                <div className="body" style={{ marginLeft:'25%'}}>
                 <h1>Profile Details</h1>  
-                    <h4>Personal information</h4>
-                    <hr></hr>
-                    <h6 style={{color: "white"}}>Email: </h6>
-
-                    {/* <ul>
-                     {this.state.customerDetail.map(detail =>(
-                          <h6 key={detail.id}>{detail.username} </h6>
-                     ))}
-                   </ul> */}
-
-                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6> 
-                    <h6 style={{color: "white"}}>Full name:</h6> 
-                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.fullname} </h6>
-                    <h6 style={{color: "white"}}>Phone number:</h6>
-                    <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.phoneNumber} </h6>
-                    <hr/>
-                    <h4>Personal address</h4>
-                    <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.address} </h6>
-                    <hr/>
-                <CreateEditButton/> 
-                <DeleteAccount/>
+                    <table style={{ width: '700px' }} >
+                        <thead>
+                            <tr>
+                                <td> Email</td>
+                                <td> Full name</td>
+                                <td> Phone number</td>
+                                <td>Personal address</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> {this.state.username}</td>
+                                <td> {this.state.fullname}</td>
+                                <td> {this.state.phoneNumber}</td>
+                                <td>{this.state.address}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <Button
+                        className='btnEdt'
+                        href={'/profile/Edit'}
+                        style={{ marginRight: '10px' }}>Edit</Button>
+                    <Button
+                        className='btnDel'
+                        onClick = {this.delete.bind(this)}
+                        href='/login'>
+                        Delete
+                    </Button>
              </div> 
           </Container>
             
