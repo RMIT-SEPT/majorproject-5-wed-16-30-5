@@ -7,16 +7,14 @@ import urlAddress from "../../ip.json";
 const url = 'http://'+urlAddress.ip+':8080/api/';
 console.log(urlAddress.ip);
 
-
-
 class Edit_Profile extends Component
 {
     constructor(props) {
         super(props)
 
         this.state = {
-            id: '1',
-            username: 'cus@come',
+            id: '2',
+            username: 'email@email.com',
             password:'password',
             fullname: '',
             address:'',
@@ -25,42 +23,45 @@ class Edit_Profile extends Component
         this.SaveData = this.SaveData.bind(this);
         this.changeNameHandler = this.changeNameHandler.bind(this);
     }
-
-    
     changeNameHandler = (event) => {
         this.setState({ [event.target.name]: event.target.value });    }
 
     handleSubmit = event => {
         event.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
-            console.log(this.state);
-        }
+
     }
+
+    validation(){
+        if (this.state.fullname === "" || this.state.address === ""||this.state.phoneNumber === "") {
+            alert("Empty fields are not allowed!");
+          }
+    }
+
     SaveData() {
         let h = new Headers();
-
         h.append('Content-Type', 'application/json');
         h.append('Accept', 'application/json');
 
-        var msg = window.confirm("Are you sure you want to update the details?");
-        if (msg === true )
-         {
-            alert("Personal Details successfully updated");
-            fetch(url + 'users/register', {
-                method: 'post',
-                headers: h,
-                body: JSON.stringify({
-                    id: this.state.id,
-                    username: this.state.username,
-                    password: this.state.password,
-                    confirmPassword: this.state.password,
-                    fullname: this.state.fullname,
-                    address:this.state.address,
-                    phoneNumber: this.state.phoneNumber 
+            this.validation();
+            var msg = window.confirm("Are you sure you want to update the details?");
+            if (msg === true )
+            {
+                alert("Personal Details successfully updated");
+                fetch(url + 'users/register', {
+                    method: 'post',
+                    headers: h,
+                    body: JSON.stringify({
+                        id: this.state.id,
+                        username: this.state.username,
+                        password: this.state.password,
+                        confirmPassword: this.state.password,
+                        fullname: this.state.fullname,
+                        address:this.state.address,
+                        phoneNumber: this.state.phoneNumber 
+                    })
                 })
-            })
-    }
+                window.location.replace('http://localhost:3000/profile');
+        } 
         console.log(this.state);
     }
 
@@ -72,11 +73,12 @@ class Edit_Profile extends Component
                 <Sidebar />
                 <div style={{ marginLeft: '25%' }}>
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label> Name: </label>
-                            <input type="text" placeholder="Name" name="fullname" className="form-control"
+                        <div className="form-group ">
+                            <label > Name: </label>
+                            <input id="myError" type="text" placeholder="Enter full Name" name="fullname" className="form-control"
                                 value={this.state.fullname} onChange={this.changeNameHandler} />
                         </div>
+                        
                         <div className="form-group">
                             <label> Phone: </label>
                             <input type="text" placeholder="valid phone number" name="phoneNumber" className="form-control"
@@ -91,8 +93,9 @@ class Edit_Profile extends Component
                         
                         <Button
                             className="btn btn-success"
+                            type="click"
                             onClick={this.SaveData.bind(this, this.state.id)}
-                             href="/profile"
+                            //  href="/profile"
                              >
                             Save
                         </Button>
@@ -102,6 +105,7 @@ class Edit_Profile extends Component
             </Container>
         )
     }
+    
 }
 
          

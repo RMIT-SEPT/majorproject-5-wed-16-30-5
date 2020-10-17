@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Login from "../Login/Login.js";
+import Login from "../components/Pages/Login/Login.js";
 
 Enzyme.configure( { adapter: new Adapter()} );
 

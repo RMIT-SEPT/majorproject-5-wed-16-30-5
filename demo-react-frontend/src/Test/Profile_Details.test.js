@@ -58,7 +58,7 @@ it("Return matched and correct personal inforamtion", ()=>{
     
 });
 
-//Tests will fail  the data does not match with the values
+//Tests will fail the data does not match with the values
 it("Return unmatched and incorrect personal inforamtion", ()=>{
     const Data =
     {

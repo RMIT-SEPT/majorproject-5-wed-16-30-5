@@ -17,32 +17,18 @@ console.log(urlAddress.ip);
         constructor(props) {
             super(props)
         this.state = {
-            id:this.props.match.params.id,
+            id:'',
             customerDetail: [],
             errorMsg:'',
 
         }
-      
         this.componentDidMount = this.componentDidMount.bind(this);
-
     }
 
     componentDidMount(){
-        const cu_id = this.props.match.params.id;
-        axios.get(url + `users/1`)
-        // axios.get(url + `users/${cu_id}`)
+        axios.get(url + `users/2`)
             .then(response =>{
                 console.log(response);
-
-                // window.sessionStorage.setItem("token", response.data.token);
-                // window.sessionStorage.setItem("id", encryptedId);
-                // const decodedId =  jwt_decode(token);
-                // console.log(decoded);
-                // window.sessionStorage.setItem("id", decodedId);
-
-                // var decodedHeader = jwt_decode(token, { header: true });
-                // console.log(decodedHeader);
-               
                 this.setState({
                     id: response.data,
                     customerDetail: response.data
@@ -52,10 +38,7 @@ console.log(urlAddress.ip);
                 console.log(error);
                 this.setState({errorMsg: 'Cannot get the profile details' })
             })
-
-    }
-
-  
+}
     render () {
         const { customerDetail, errorMsg} = this.state
 
@@ -67,16 +50,9 @@ console.log(urlAddress.ip);
                     <h4>Personal information</h4>
                     <hr></hr>
                     <h6 style={{color: "white"}}>Email: </h6>
-
-                    {/* <ul>
-                     {this.state.customerDetail.map(detail =>(
-                          <h6 key={detail.id}>{detail.username} </h6>
-                     ))}
-                   </ul> */}
-
-                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6> 
+                    <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.username} </h6> 
                     <h6 style={{color: "white"}}>Full name:</h6> 
-                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.fullname} </h6>
+                    <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.fullname} </h6>
                     <h6 style={{color: "white"}}>Phone number:</h6>
                     <h6 style={{color: "white"}} key={this.state.customerDetail.id}>{this.state.customerDetail.phoneNumber} </h6>
                     <hr/>

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import * as IoIcons from 'react-icons/io';
 import './EmployeesPage.css';
 import { Button } from "react-bootstrap";
-import CreateAddEmployeeButton from './CreateAddEmployeeButton.js';
+import CreateAddEmployeeButton from '../Employee/CreateAddEmployeeButton.js';
 import Sidebar from "../../Layout/Sidebar/Sidebar.js";
 import urlAddress from '../../ip.json';
 

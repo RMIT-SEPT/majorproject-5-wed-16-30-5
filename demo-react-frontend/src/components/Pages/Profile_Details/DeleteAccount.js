@@ -37,7 +37,11 @@ class DeleteAccount extends Component
                         id="btnDelete" type="Button"
                         value="Delete account"
                         variant="danger" 
-                        style={{ marginRight: '0%' }}
+                        style=
+                        {{ 
+                            position: 'fixed',top: 110,
+                            left: 1100, 
+                        }}  
                         className="Button"
                         onClick={() => this.deleteAccount()}
                         >                         

@@ -53,9 +53,6 @@ class Login extends Component {
               const encryptedString = cryptr.encrypt(this.state.password);
               window.sessionStorage.setItem("encrypted", encryptedString);
 
-              const encryptedId = cryptr.encrypt(this.state.id);
-              window.sessionStorage.setItem("id", encryptedId)
-
               this.props.history.push("/UserAppo");
               window.location.reload(true);
               //return <Redirect to='/UserAppo' />
